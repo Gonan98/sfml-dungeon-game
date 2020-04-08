@@ -16,7 +16,6 @@ bool Mapa::regionVacia(int i, int j) {
 }
 
 void Mapa::colocar_enemigos(sf::Texture* tEnemigos) {
-	srand(time(0));
 	for (int i = 0; i < 5;) {
 		int posX = (rand() % (COLUMNA - 4) + 2) * CUADRO;
 		int posY = (rand()%(FILA - 4) + 2) * CUADRO;
@@ -31,7 +30,6 @@ void Mapa::colocar_enemigos(sf::Texture* tEnemigos) {
 }
 
 void Mapa::colocar_decoracion(sf::Texture* naturales) {
-	srand(time(0));
 	for (int i = 0; i < FILA; i++)
 		for (int j = 0; j < COLUMNA; j++) {
 			if (j == 0 || i == 0 || j == COLUMNA - 1 || i == FILA - 1) {

@@ -3,14 +3,18 @@
 Enemigo::Enemigo() : Entidad(){
 	daño = 0;
 	vida = 5;
+	tipo = TipoEnemigo::ORCO;
 }
 Enemigo::Enemigo(Animacion* animacion, TipoEnemigo tipo, int x, int y) : Entidad(animacion, x, y) {
-	switch (tipo)
+	vida = 5;
+	daño = 0;
+	this->tipo = tipo;
+	switch (this->tipo)
 	{
 	case TipoEnemigo::ORCO:
 		vida = 15;
 		daño = 3;
-		dx = dy = 8;
+		dx = dy = 6;
 		break;
 	case TipoEnemigo::ESQUELETO:
 		vida = 10;

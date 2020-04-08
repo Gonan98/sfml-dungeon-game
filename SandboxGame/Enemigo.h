@@ -7,15 +7,16 @@ class Enemigo : public Entidad{
 protected:
 	int daño;
 	int vida;
-
+	TipoEnemigo tipo;
 	void direccion_contra(Movimiento tipo);
 public:
 	Enemigo();
 	Enemigo(Animacion* animacion, TipoEnemigo tipo, int x, int y);
-	virtual ~Enemigo();
+	~Enemigo();
 
 	int getDaño();
 	int getVida();
+	TipoEnemigo getTipo();
 
 	void setDaño(int value);
 	void setVida(int value);

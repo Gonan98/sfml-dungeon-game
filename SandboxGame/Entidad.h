@@ -16,6 +16,7 @@ public:
 	Entidad(Animacion* animacion, int x, int y, int ancho, int alto, int dx, int dy);
 	virtual ~Entidad();
 
+	Animacion* getAnimacion();
 	int getX();
 	int getY();
 	int getAncho();

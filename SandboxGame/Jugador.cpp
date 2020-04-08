@@ -1,7 +1,7 @@
 #include "Jugador.h"
 
 Jugador::Jugador() : Entidad(){
-	vidas = 0;
+	vidas = 5;
 	puntaje = 0;
 	nombre = "Player";
 }
@@ -49,4 +49,10 @@ void Jugador::mover(int** matriz) {
 	case Movimiento::NINGUNO:
 		break;
 	}
+}
+
+void Jugador::dañar(int daño) {
+	vidas -= daño;
+	if (vidas < 0)
+		vidas = 0;
 }

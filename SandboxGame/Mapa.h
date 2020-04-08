@@ -16,7 +16,6 @@ private:
 	std::vector<Naturaleza*> decoracion;
 	std::vector<Enemigo*> enemigos;
 	sf::Sprite sprite;
-
 	bool regionVacia(int i, int j);
 	void inicializar_matriz();
 	void colocar_decoracion(sf::Texture* naturales);
@@ -29,8 +28,6 @@ public:
 	int** getMatriz();
 
 	void dibujar_fondo(sf::RenderWindow& w);
-
 	void dibujar_decoracion(sf::RenderWindow& w);
-
 	void dibujar_enemigos(sf::RenderWindow& w);
 };

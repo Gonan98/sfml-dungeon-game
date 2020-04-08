@@ -27,8 +27,9 @@ Entidad::Entidad(Animacion* animacion, int x, int y, int ancho, int alto, int dx
 	this->dy = dy;
 	this->animacion = animacion;
 }
-Entidad::~Entidad() {}
+Entidad::~Entidad() { delete animacion; }
 
+Animacion* Entidad::getAnimacion() { return animacion; }
 int Entidad::getX() { return x; }
 int Entidad::getY() { return y; }
 int Entidad::getAncho() { return ancho; }

@@ -1,12 +1,13 @@
-#include "Jugador.h"
-#include "Mapa.h"
-#include "Naturaleza.h"
+#include "Controller.h"
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
 
 using namespace sf;
 
 int main()
 {
-    
+    srand(time(0));
     RenderWindow window(VideoMode(1248, 720), "Sandbox Game");
     window.setFramerateLimit(30);
 
@@ -36,9 +37,8 @@ int main()
     tEnemigos[3].loadFromFile("recursos/espectro.png");
     tEnemigos[4].loadFromFile("recursos/segador.png");
 
-    Animacion* aJugador = new Animacion(tJugador1, 48, 48, 4, 3, 0.40f);
-    Jugador* j1 = new Jugador(aJugador, 48, 48, 20, 0, "Andre");
-    Mapa* mapa1 = new Mapa(tTerreno, tNaturaleza, tEnemigos, TipoTerreno::GRASS);
+    Controller* juego = new Controller(tJugador1, tTerreno, tEnemigos, tNaturaleza);
+
     while (window.isOpen())
     {
         sf::Event event;
@@ -47,23 +47,31 @@ int main()
             if (event.type == sf::Event::Closed) {
                 window.close();
             }
+            if (event.key.code == sf::Keyboard::C) {
+                juego->mapa_anterior();
+            }
+            if (event.key.code == sf::Keyboard::V) {
+                juego->mapa_siguiente();
+            }
         }
 
         if (Keyboard::isKeyPressed(Keyboard::Up))
-            aJugador->mov = Movimiento::ARRIBA;
+            juego->getJugador1()->getAnimacion()->mov = Movimiento::ARRIBA;
         else if (Keyboard::isKeyPressed(Keyboard::Down))
-            aJugador->mov = Movimiento::ABAJO;
+            juego->getJugador1()->getAnimacion()->mov = Movimiento::ABAJO;
         else if (Keyboard::isKeyPressed(Keyboard::Right))
-            aJugador->mov = Movimiento::DERECHA;
+            juego->getJugador1()->getAnimacion()->mov = Movimiento::DERECHA;
         else if (Keyboard::isKeyPressed(Keyboard::Left))
-            aJugador->mov = Movimiento::IZQUIERDA;
+            juego->getJugador1()->getAnimacion()->mov = Movimiento::IZQUIERDA;
         else
-            aJugador->mov = Movimiento::NINGUNO;
+            juego->getJugador1()->getAnimacion()->mov = Movimiento::NINGUNO;
 
-        mapa1->dibujar_fondo(window);
-        mapa1->dibujar_enemigos(window);
-        j1->dibujar(window, mapa1->getMatriz());
-        mapa1->dibujar_decoracion(window);
+        if (Keyboard::isKeyPressed(Keyboard::Z)) {
+            juego->agregar_mapa(TipoTerreno(rand() % 4));
+            std::cout << "Agregar mapa\n";
+        }
+
+        juego->dibujar_todo(window);
         window.display();
     }
 

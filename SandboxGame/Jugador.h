@@ -22,4 +22,5 @@ public:
 
 	void dibujar(sf::RenderWindow &w, int** matriz);
 	void mover(int** matriz);
+	void dañar(int daño);
 };
