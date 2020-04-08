@@ -1,0 +1,2 @@
+﻿  principal.cpp
+sfml-graphics-d.lib(sfml-graphics-d-2.dll) : fatal error LNK1112: tipo de equipo del módulo 'x64' en conflicto con tipo de equipo de destino 'x86'
