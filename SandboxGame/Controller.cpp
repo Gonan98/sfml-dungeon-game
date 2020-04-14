@@ -5,8 +5,8 @@ Controller::Controller(sf::Texture& tJugador, sf::Texture* tTerreno, sf::Texture
 	this->tEnemigos = tEnemigos;
 	this->tTerrenos = tTerreno;
 	this->tNaturaleza = tNaturaleza;
-	Animacion* aJugador = new Animacion(this->tPlayer, CUADRO, CUADRO, 4, 3, 0.4f);
-	player1 = new Jugador(aJugador, CUADRO, CUADRO, 20, 0, "Jugador1");
+	Animacion* aJugador = new Animacion(CUADRO, CUADRO, 4, 3, 0.4f);
+	player1 = new Jugador(aJugador, tJugador, CUADRO, CUADRO, 20, "Gonan");
 	mapas.push_back(new Mapa(this->tTerrenos, this->tNaturaleza, this->tEnemigos, TipoTerreno::GRASS));
 	indiceMapa = 0;
 	diff = Dificultad::MEDIO;

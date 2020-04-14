@@ -2,6 +2,7 @@
 #include "SFML/Graphics.hpp"
 
 enum class Movimiento { NINGUNO, ARRIBA, ABAJO, DERECHA, IZQUIERDA };
+enum class TipoEntidad { GENERAL, JUGADOR, ENEMIGO};
 
 class Animacion {
 private:
@@ -12,13 +13,14 @@ private:
 	int alto;
 	int filaFrame;
 	int columnaFrame;
+	sf::IntRect** rects;
+	Movimiento tipoMovimiento;
 public:
 	Animacion();
-	Animacion(sf::Texture& t, int ancho, int alto, int filaFrame, int columnaFrame, float velocidad);
+	Animacion(int ancho, int alto, int filaFrame, int columnaFrame, float velocidad);
 	~Animacion();
 
-	sf::Sprite sprite;
-	Movimiento mov;
+	Movimiento getTipoMovimiento();
 	int getAncho();
 	int getAlto();
 	float getIFrame();
@@ -26,6 +28,7 @@ public:
 	float getVelocidad();
 	int getFilaFrame();
 	int getColumnaFrame();
+	void setTipoMovimiento(Movimiento type);
 	void setAncho(int value);
 	void setAlto(int value);
 	void setIFrame(float value);
@@ -34,6 +37,5 @@ public:
 	void setFilaFrame(int value);
 	void setColumnaFrame(int value);
 
-	void update_jugador();
-	void update_enemigo();
+	sf::IntRect update(TipoEntidad type);
 };

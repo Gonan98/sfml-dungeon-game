@@ -5,7 +5,7 @@ Enemigo::Enemigo() : Entidad(){
 	vida = 5;
 	tipo = TipoEnemigo::ORCO;
 }
-Enemigo::Enemigo(Animacion* animacion, TipoEnemigo tipo, int x, int y) : Entidad(animacion, x, y) {
+Enemigo::Enemigo(Animacion* animacion, sf::Texture &t, TipoEnemigo tipo, int x, int y) : Entidad(animacion, t, x, y) {
 	vida = 5;
 	daño = 0;
 	this->tipo = tipo;
@@ -48,12 +48,11 @@ void Enemigo::setVida(int value) { vida = value; }
 
 void Enemigo::dibujar(sf::RenderWindow& w, int** matriz){
 	mover(matriz);
-	animacion->update_enemigo();
-	animacion->sprite.setPosition((float)x, (float)y);
-	w.draw(animacion->sprite);
+	sprite.setTextureRect(animacion->update(TipoEntidad::ENEMIGO));
+	w.draw(sprite);
 }
 void Enemigo::mover(int** matriz){
-	switch (animacion->mov)
+	switch (animacion->getTipoMovimiento())
 	{
 	case Movimiento::ARRIBA:
 		if (matriz[(y - dy) / 48][(x + dx) / 48] != 1 && matriz[(y - dy) / 48][(x + ancho - dx) / 48] != 1)
@@ -86,6 +85,7 @@ void Enemigo::mover(int** matriz){
 	case Movimiento::NINGUNO:
 		break;
 	}
+	sprite.setPosition((float)x, (float)y);
 }
 
 void Enemigo::direccion_contra(Movimiento tipo) {
@@ -94,16 +94,16 @@ void Enemigo::direccion_contra(Movimiento tipo) {
 	case Movimiento::NINGUNO:
 		break;
 	case Movimiento::ARRIBA:
-		animacion->mov = Movimiento::ABAJO;
+		animacion->setTipoMovimiento(Movimiento::ABAJO);
 		break;
 	case Movimiento::ABAJO:
-		animacion->mov = Movimiento::ARRIBA;
+		animacion->setTipoMovimiento(Movimiento::ARRIBA);
 		break;
 	case Movimiento::DERECHA:
-		animacion->mov = Movimiento::IZQUIERDA;
+		animacion->setTipoMovimiento(Movimiento::IZQUIERDA);
 		break;
 	case Movimiento::IZQUIERDA:
-		animacion->mov = Movimiento::DERECHA;
+		animacion->setTipoMovimiento(Movimiento::DERECHA);
 		break;
 	default:
 		break;
@@ -111,8 +111,8 @@ void Enemigo::direccion_contra(Movimiento tipo) {
 }
 
 void Enemigo::direccion_random() {
-	Movimiento temp = animacion->mov;
-	animacion->mov = Movimiento(rand() % 4 + 1);
-	if (temp == animacion->mov)
-		direccion_contra(animacion->mov);
+	Movimiento temp = animacion->getTipoMovimiento();
+	animacion->setTipoMovimiento(Movimiento(rand() % 4 + 1));
+	if (temp == animacion->getTipoMovimiento())
+		direccion_contra(animacion->getTipoMovimiento());
 }

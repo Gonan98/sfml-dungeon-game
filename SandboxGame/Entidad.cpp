@@ -10,22 +10,24 @@ Entidad::Entidad(){
 	animacion = new Animacion();
 }
 
-Entidad::Entidad(Animacion* animacion, int x, int y) {
+Entidad::Entidad(Animacion* animacion, sf::Texture& t, int x, int y) {
 	this->x = x;
 	this->y = y;
 	ancho = alto = 48;
 	dx = dy = 8;
 	this->animacion = animacion;
+	sprite.setTexture(t);
 }
 
-Entidad::Entidad(Animacion* animacion, int x, int y, int ancho, int alto, int dx, int dy) {
+Entidad::Entidad(Animacion* animacion, sf::Texture& t, int x, int y, int ancho, int alto) {
 	this->x = x;
 	this->y = y;
 	this->ancho = ancho;
 	this->alto = alto;
-	this->dx = dx;
-	this->dy = dy;
+	this->dx = 8;
+	this->dy = 8;
 	this->animacion = animacion;
+	this->sprite.setTexture(t);
 }
 Entidad::~Entidad() { delete animacion; }
 

@@ -39,6 +39,9 @@
     <ClCompile Include="Controller.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="Cofre.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entidad.h">
@@ -60,6 +63,9 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="Controller.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Cofre.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
@@ -104,6 +110,12 @@
       <Filter>Archivos de recursos</Filter>
     </Image>
     <Image Include="recursos\murcielago.png">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="recursos\sword.png">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="recursos\chests_sprite.png">
       <Filter>Archivos de recursos</Filter>
     </Image>
   </ItemGroup>

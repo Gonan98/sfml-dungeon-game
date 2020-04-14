@@ -9,11 +9,12 @@ protected:
 	int alto;
 	int dx;
 	int dy;
+	sf::Sprite sprite;
 	Animacion* animacion;
 public:
 	Entidad();
-	Entidad(Animacion* animacion, int x, int y);
-	Entidad(Animacion* animacion, int x, int y, int ancho, int alto, int dx, int dy);
+	Entidad(Animacion* animacion, sf::Texture &t, int x, int y);
+	Entidad(Animacion* animacion, sf::Texture& t, int x, int y, int ancho, int alto);
 	virtual ~Entidad();
 
 	Animacion* getAnimacion();

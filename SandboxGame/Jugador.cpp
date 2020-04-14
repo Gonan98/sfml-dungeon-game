@@ -5,9 +5,9 @@ Jugador::Jugador() : Entidad(){
 	puntaje = 0;
 	nombre = "Player";
 }
-Jugador::Jugador(Animacion* animacion, int x, int y, int vidas, int puntaje, std::string nombre) : Entidad(animacion, x, y){
+Jugador::Jugador(Animacion* animacion, sf::Texture& t, int x, int y, int vidas, std::string nombre) : Entidad(animacion, t, x, y){
 	this->vidas = vidas;
-	this->puntaje = puntaje;
+	this->puntaje = 0;
 	this->nombre = nombre;
 }
 Jugador::~Jugador(){}
@@ -22,20 +22,19 @@ void Jugador::setNombre(std::string value) { nombre = value; }
 
 void Jugador::dibujar(sf::RenderWindow &w, int** matriz) {
 	mover(matriz);
-	animacion->update_jugador();
-	animacion->sprite.setPosition((float)x, (float)y);
-	w.draw(animacion->sprite);
+	sprite.setTextureRect(animacion->update(TipoEntidad::JUGADOR));
+	w.draw(sprite);
 }
 
 void Jugador::mover(int** matriz) {
-	switch (animacion->mov)
+	switch (animacion->getTipoMovimiento())
 	{
 	case Movimiento::ARRIBA:
-		if (matriz[(y - dy) / 48][(x + dx) / 48] != 1 && matriz[(y - dy) / 48][(x + ancho - dx) / 48] != 1)
+		if (matriz[(y - dy) / 48][(x + dx) / 48] != 1 && matriz[(y - dy) / 48][(x + ancho - 2*dx) / 48] != 1)
 			y -= dy;
 		break;
 	case Movimiento::ABAJO:
-		if (matriz[(y + alto) / 48][(x + dx) / 48] != 1 && matriz[(y + alto) / 48][(x + ancho - dx) / 48] != 1)
+		if (matriz[(y + alto) / 48][(x + dx) / 48] != 1 && matriz[(y + alto) / 48][(x + ancho - 2*dx) / 48] != 1)
 			y += dy;
 		break;
 	case Movimiento::DERECHA:
@@ -49,6 +48,7 @@ void Jugador::mover(int** matriz) {
 	case Movimiento::NINGUNO:
 		break;
 	}
+	sprite.setPosition((float)x, (float)y);
 }
 
 void Jugador::dañar(int daño) {

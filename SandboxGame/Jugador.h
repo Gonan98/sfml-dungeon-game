@@ -9,7 +9,7 @@ private:
 	std::string nombre;
 public:
 	Jugador();
-	Jugador(Animacion* animacion, int x, int y, int vidas, int puntaje, std::string nombre);
+	Jugador(Animacion* animacion, sf::Texture& t, int x, int y, int vidas, std::string nombre);
 	~Jugador();
 
 	int getVidas();

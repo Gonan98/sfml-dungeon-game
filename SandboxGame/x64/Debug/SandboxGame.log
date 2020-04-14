@@ -1,5 +1,11 @@
-﻿  Controller.cpp
+﻿  Animacion.cpp
+  Cofre.cpp
+  Controller.cpp
+  Enemigo.cpp
+  Entidad.cpp
+  Jugador.cpp
+  Mapa.cpp
+  Naturaleza.cpp
   principal.cpp
-C:\Users\andre\Documents\Programacion\C++\SandboxGame\SandboxGame\principal.cpp(10,15): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
   Generando código...
   SandboxGame.vcxproj -> C:\Users\andre\Documents\Programacion\C++\SandboxGame\x64\Debug\SandboxGame.exe

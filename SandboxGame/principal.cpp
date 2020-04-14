@@ -7,7 +7,7 @@ using namespace sf;
 
 int main()
 {
-    srand(time(0));
+    srand((unsigned)time(0));
     RenderWindow window(VideoMode(1248, 720), "Sandbox Game");
     window.setFramerateLimit(30);
 
@@ -56,15 +56,15 @@ int main()
         }
 
         if (Keyboard::isKeyPressed(Keyboard::Up))
-            juego->getJugador1()->getAnimacion()->mov = Movimiento::ARRIBA;
+            juego->getJugador1()->getAnimacion()->setTipoMovimiento(Movimiento::ARRIBA);
         else if (Keyboard::isKeyPressed(Keyboard::Down))
-            juego->getJugador1()->getAnimacion()->mov = Movimiento::ABAJO;
+            juego->getJugador1()->getAnimacion()->setTipoMovimiento(Movimiento::ABAJO);
         else if (Keyboard::isKeyPressed(Keyboard::Right))
-            juego->getJugador1()->getAnimacion()->mov = Movimiento::DERECHA;
+            juego->getJugador1()->getAnimacion()->setTipoMovimiento(Movimiento::DERECHA);
         else if (Keyboard::isKeyPressed(Keyboard::Left))
-            juego->getJugador1()->getAnimacion()->mov = Movimiento::IZQUIERDA;
+            juego->getJugador1()->getAnimacion()->setTipoMovimiento(Movimiento::IZQUIERDA);
         else
-            juego->getJugador1()->getAnimacion()->mov = Movimiento::NINGUNO;
+            juego->getJugador1()->getAnimacion()->setTipoMovimiento(Movimiento::NINGUNO);
 
         if (Keyboard::isKeyPressed(Keyboard::Z)) {
             juego->agregar_mapa(TipoTerreno(rand() % 4));

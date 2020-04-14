@@ -11,7 +11,7 @@ protected:
 	void direccion_contra(Movimiento tipo);
 public:
 	Enemigo();
-	Enemigo(Animacion* animacion, TipoEnemigo tipo, int x, int y);
+	Enemigo(Animacion* animacion, sf::Texture &t, TipoEnemigo tipo, int x, int y);
 	~Enemigo();
 
 	int getDaño();

@@ -21,9 +21,9 @@ void Mapa::colocar_enemigos(sf::Texture* tEnemigos) {
 		int posY = (rand()%(FILA - 4) + 2) * CUADRO;
 		if (matrizMapa[posY / CUADRO][posX / CUADRO] == 0) {
 			int tipo = rand() % 5;
-			Animacion* a = new Animacion(tEnemigos[tipo], CUADRO, CUADRO, 4, 3, 0.40f);
-			a->mov = Movimiento(rand() % 4 + 1);
-			enemigos.push_back(new Enemigo(a, TipoEnemigo(tipo), posX, posY));
+			Animacion* a = new Animacion(CUADRO, CUADRO, 4, 3, 0.40f);
+			a->setTipoMovimiento(Movimiento(rand() % 4 + 1));
+			enemigos.push_back(new Enemigo(a, tEnemigos[tipo], TipoEnemigo(tipo), posX, posY));
 			i++;
 		}
 	}

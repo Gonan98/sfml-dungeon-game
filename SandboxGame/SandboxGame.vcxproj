@@ -150,6 +150,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animacion.cpp" />
+    <ClCompile Include="Cofre.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Enemigo.cpp" />
     <ClCompile Include="Entidad.cpp" />
@@ -160,6 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animacion.h" />
+    <ClInclude Include="Cofre.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="Enemigo.h" />
     <ClInclude Include="Entidad.h" />
@@ -171,6 +173,7 @@
     <Image Include="recursos\adoquin.png" />
     <Image Include="recursos\arbol.png" />
     <Image Include="recursos\arena.png" />
+    <Image Include="recursos\chests_sprite.png" />
     <Image Include="recursos\espectro.png" />
     <Image Include="recursos\esqueleto.png" />
     <Image Include="recursos\murcielago.png" />
@@ -181,6 +184,7 @@
     <Image Include="recursos\piedra.png" />
     <Image Include="recursos\roca.png" />
     <Image Include="recursos\segador.png" />
+    <Image Include="recursos\sword.png" />
     <Image Include="recursos\tierra.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
