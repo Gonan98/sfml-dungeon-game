@@ -7,8 +7,8 @@ class Naturaleza {
 protected:
 	int x;
 	int y;
-	int ancho;
-	int alto;
+	int w;
+	int h;
 	sf::Sprite sprite;
 public:
 	Naturaleza();

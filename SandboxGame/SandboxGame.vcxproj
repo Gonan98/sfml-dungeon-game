@@ -165,6 +165,7 @@
     <ClInclude Include="Controller.h" />
     <ClInclude Include="Enemigo.h" />
     <ClInclude Include="Entidad.h" />
+    <ClInclude Include="Hitbox.h" />
     <ClInclude Include="Jugador.h" />
     <ClInclude Include="Mapa.h" />
     <ClInclude Include="Naturaleza.h" />

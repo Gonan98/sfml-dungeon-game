@@ -1,41 +1,46 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 
-enum class Movimiento { NINGUNO, ARRIBA, ABAJO, DERECHA, IZQUIERDA };
-enum class TipoEntidad { GENERAL, JUGADOR, ENEMIGO};
+enum class TipoMovimiento { NINGUNO, ARRIBA, ABAJO, DERECHA, IZQUIERDA };
+enum class TipoEntidad { GENERAL, JUGADOR, ENEMIGO };
 
 class Animacion {
 private:
-	float iFrame;
-	float jFrame;
+	float xFrame;
+	float yFrame;
 	float velocidad;
-	int ancho;
-	int alto;
-	int filaFrame;
-	int columnaFrame;
+	int anchoFrame;
+	int altoFrame;
+	int filas;
+	int columnas;
 	sf::IntRect** rects;
-	Movimiento tipoMovimiento;
+	TipoMovimiento movimiento;
 public:
 	Animacion();
-	Animacion(int ancho, int alto, int filaFrame, int columnaFrame, float velocidad);
+	Animacion(int anchoFrame, int altoFrame, int filas, int columnas, float velocidad);
+	Animacion(int anchoFrame, int altoFrame, int xFrame, float yFrame, int filas, int columnas, float velocidad);
 	~Animacion();
 
-	Movimiento getTipoMovimiento();
-	int getAncho();
-	int getAlto();
-	float getIFrame();
-	float getJFrame();
+	TipoMovimiento getMovimiento();
+	int getAnchoFrame();
+	int getAltoFrame();
+	float getXFrame();
+	float getYFrame();
 	float getVelocidad();
 	int getFilaFrame();
 	int getColumnaFrame();
-	void setTipoMovimiento(Movimiento type);
-	void setAncho(int value);
-	void setAlto(int value);
-	void setIFrame(float value);
-	void setJFrame(float value);
+	sf::IntRect frameActual();
+	void setMovimiento(TipoMovimiento type);
+	void setAnchoFrame(int value);
+	void setAltoFrame(int value);
+	void setXFrame(float value);
+	void setYFrame(float value);
 	void setVelocidad(float value);
 	void setFilaFrame(int value);
 	void setColumnaFrame(int value);
 
+	bool secuenciaFinalizada();
+
 	sf::IntRect update(TipoEntidad type);
+	sf::IntRect update();
 };

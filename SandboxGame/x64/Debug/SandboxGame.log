@@ -1,11 +1,20 @@
-﻿  Animacion.cpp
-  Cofre.cpp
-  Controller.cpp
-  Enemigo.cpp
-  Entidad.cpp
-  Jugador.cpp
-  Mapa.cpp
-  Naturaleza.cpp
-  principal.cpp
-  Generando código...
+﻿  Jugador.cpp
+C:\Users\andre\Documents\Programacion\C++\SandboxGame\SandboxGame\Jugador.cpp(26,77): warning C4244: 'argumento': conversión de 'T' a 'T'; posible pérdida de datos
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\andre\Documents\Programacion\C++\SandboxGame\SandboxGame\Jugador.cpp(26,63): warning C4244: 'argumento': conversión de 'T' a 'T'; posible pérdida de datos
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
   SandboxGame.vcxproj -> C:\Users\andre\Documents\Programacion\C++\SandboxGame\x64\Debug\SandboxGame.exe

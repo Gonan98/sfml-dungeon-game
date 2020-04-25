@@ -42,6 +42,7 @@ Enemigo::~Enemigo(){}
 
 int Enemigo::getDaño() { return daño; }
 int Enemigo::getVida() { return vida; }
+TipoEnemigo Enemigo::getTipo() { return tipo; }
 
 void Enemigo::setDaño(int value) { daño = value; }
 void Enemigo::setVida(int value) { vida = value; }
@@ -52,58 +53,58 @@ void Enemigo::dibujar(sf::RenderWindow& w, int** matriz){
 	w.draw(sprite);
 }
 void Enemigo::mover(int** matriz){
-	switch (animacion->getTipoMovimiento())
+	switch (animacion->getMovimiento())
 	{
-	case Movimiento::ARRIBA:
-		if (matriz[(y - dy) / 48][(x + dx) / 48] != 1 && matriz[(y - dy) / 48][(x + ancho - dx) / 48] != 1)
+	case TipoMovimiento::ARRIBA:
+		if (matriz[(y - dy) / 48][(x + dx) / 48] != 1 && matriz[(y - dy) / 48][(x + w - dx) / 48] != 1)
 			y -= dy;
 		else {
 			direccion_random();
 		}
 		break;
-	case Movimiento::ABAJO:
-		if (matriz[(y + alto) / 48][(x + dx) / 48] != 1 && matriz[(y + alto) / 48][(x + ancho - dx) / 48] != 1)
+	case TipoMovimiento::ABAJO:
+		if (matriz[(y + h) / 48][(x + dx) / 48] != 1 && matriz[(y + h) / 48][(x + w - dx) / 48] != 1)
 			y += dy;
 		else {
 			direccion_random();
 		}
 		break;
-	case Movimiento::DERECHA:
-		if (matriz[(y) / 48][(x + ancho) / 48] != 1 && matriz[(y + alto - dy) / 48][(x + ancho) / 48] != 1)
+	case TipoMovimiento::DERECHA:
+		if (matriz[(y) / 48][(x + w) / 48] != 1 && matriz[(y + h - dy) / 48][(x + w) / 48] != 1)
 			x += dx;
 		else {
 			direccion_random();
 		}
 		break;
-	case Movimiento::IZQUIERDA:
-		if (matriz[(y) / 48][(x - dx) / 48] != 1 && matriz[(y + alto - dy) / 48][(x - dx) / 48] != 1)
+	case TipoMovimiento::IZQUIERDA:
+		if (matriz[(y) / 48][(x - dx) / 48] != 1 && matriz[(y + h - dy) / 48][(x - dx) / 48] != 1)
 			x -= dx;
 		else {
 			direccion_random();
 		}
 		break;
-	case Movimiento::NINGUNO:
+	case TipoMovimiento::NINGUNO:
 		break;
 	}
 	sprite.setPosition((float)x, (float)y);
 }
 
-void Enemigo::direccion_contra(Movimiento tipo) {
+void Enemigo::direccion_contra(TipoMovimiento tipo) {
 	switch (tipo)
 	{
-	case Movimiento::NINGUNO:
+	case TipoMovimiento::NINGUNO:
 		break;
-	case Movimiento::ARRIBA:
-		animacion->setTipoMovimiento(Movimiento::ABAJO);
+	case TipoMovimiento::ARRIBA:
+		animacion->setMovimiento(TipoMovimiento::ABAJO);
 		break;
-	case Movimiento::ABAJO:
-		animacion->setTipoMovimiento(Movimiento::ARRIBA);
+	case TipoMovimiento::ABAJO:
+		animacion->setMovimiento(TipoMovimiento::ARRIBA);
 		break;
-	case Movimiento::DERECHA:
-		animacion->setTipoMovimiento(Movimiento::IZQUIERDA);
+	case TipoMovimiento::DERECHA:
+		animacion->setMovimiento(TipoMovimiento::IZQUIERDA);
 		break;
-	case Movimiento::IZQUIERDA:
-		animacion->setTipoMovimiento(Movimiento::DERECHA);
+	case TipoMovimiento::IZQUIERDA:
+		animacion->setMovimiento(TipoMovimiento::DERECHA);
 		break;
 	default:
 		break;
@@ -111,8 +112,8 @@ void Enemigo::direccion_contra(Movimiento tipo) {
 }
 
 void Enemigo::direccion_random() {
-	Movimiento temp = animacion->getTipoMovimiento();
-	animacion->setTipoMovimiento(Movimiento(rand() % 4 + 1));
-	if (temp == animacion->getTipoMovimiento())
-		direccion_contra(animacion->getTipoMovimiento());
+	TipoMovimiento temp = animacion->getMovimiento();
+	animacion->setMovimiento(TipoMovimiento(rand() % 4 + 1));
+	if (temp == animacion->getMovimiento())
+		direccion_contra(animacion->getMovimiento());
 }

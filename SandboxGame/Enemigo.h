@@ -8,7 +8,7 @@ protected:
 	int daño;
 	int vida;
 	TipoEnemigo tipo;
-	void direccion_contra(Movimiento tipo);
+	void direccion_contra(TipoMovimiento tipo);
 public:
 	Enemigo();
 	Enemigo(Animacion* animacion, sf::Texture &t, TipoEnemigo tipo, int x, int y);

@@ -1,119 +1,151 @@
 #include "Animacion.h"
 
 Animacion::Animacion(){
-	tipoMovimiento = Movimiento::NINGUNO;
-	jFrame = iFrame = 0.0f;
-	ancho = alto = 48;
-	filaFrame = columnaFrame = 0;
+	movimiento = TipoMovimiento::NINGUNO;
+	xFrame = yFrame = 0.0f;
+	anchoFrame = altoFrame = 48;
+	filas = columnas = 1;
 	velocidad = 0.0f;
-	rects = new sf::IntRect * [filaFrame];
-	for (int i = 0; i < filaFrame; i++) {
-		rects[i] = new sf::IntRect[columnaFrame];
-		for (int j = 0; j < columnaFrame; j++)
-			rects[i][j] = sf::IntRect(j * ancho, i * alto, ancho, alto);
+	rects = new sf::IntRect * [filas];
+	for (int i = 0; i < filas; i++) {
+		rects[i] = new sf::IntRect[columnas];
+		for (int j = 0; j < columnas; j++)
+			rects[i][j] = sf::IntRect(j * anchoFrame, i * altoFrame, anchoFrame, altoFrame);
 	}
 }
 
-Animacion::Animacion(int ancho, int alto, int filaFrame, int columnaFrame, float velocidad) {
-	tipoMovimiento = Movimiento::NINGUNO;
-	iFrame = 0;
-	jFrame = 1;
-	this->ancho = ancho;
-	this->alto = alto;
-	this->filaFrame = filaFrame;
-	this->columnaFrame = columnaFrame;
+Animacion::Animacion(int anchoFrame, int altoFrame, int filas, int columnas, float velocidad) {
+	movimiento = TipoMovimiento::NINGUNO;
+	xFrame = 0;
+	yFrame = 0;
+	this->anchoFrame = anchoFrame;
+	this->altoFrame = altoFrame;
+	this->filas = filas;
+	this->columnas = columnas;
 	this->velocidad = velocidad;
 
-	rects = new sf::IntRect*[filaFrame];
-	for (int i = 0; i < filaFrame; i++) {
-		rects[i] = new sf::IntRect[columnaFrame];
-		for (int j = 0; j < columnaFrame; j++)
-			rects[i][j] = sf::IntRect(j * ancho, i * alto, ancho, alto);
+	rects = new sf::IntRect*[this->filas];
+	for (int i = 0; i < this->filas; i++) {
+		rects[i] = new sf::IntRect[this->columnas];
+		for (int j = 0; j < this->columnas; j++)
+			rects[i][j] = sf::IntRect(j * anchoFrame, i * altoFrame, anchoFrame, altoFrame);
+	}
+}
+
+Animacion::Animacion(int anchoFrame, int altoFrame, int xFrame, float yFrame, int filas, int columnas, float velocidad) {
+	movimiento = TipoMovimiento::NINGUNO;
+	this->xFrame = 0;
+	this->yFrame = 0;
+	this->anchoFrame = anchoFrame;
+	this->altoFrame = altoFrame;
+	this->filas = filas;
+	this->columnas = columnas;
+	this->velocidad = velocidad;
+
+	rects = new sf::IntRect * [this->filas];
+	for (int i = 0; i < this->filas; i++) {
+		rects[i] = new sf::IntRect[this->columnas];
+		for (int j = 0; j < this->columnas; j++)
+			rects[i][j] = sf::IntRect((j + xFrame) * altoFrame, (i + yFrame) * anchoFrame, anchoFrame, altoFrame);
 	}
 }
 
 Animacion::~Animacion() {
-	for (int i = 0; i < filaFrame; i++)
+	for (int i = 0; i < filas; i++)
 		delete[] rects[i];
 	delete[] rects;
 }
 
-Movimiento Animacion::getTipoMovimiento() { return tipoMovimiento; }
-int Animacion::getAncho() { return ancho; }
-int Animacion::getAlto() { return alto; }
-float Animacion::getIFrame() { return iFrame; }
-float Animacion::getJFrame() { return jFrame; }
+TipoMovimiento Animacion::getMovimiento() { return movimiento; }
+int Animacion::getAnchoFrame() { return anchoFrame; }
+int Animacion::getAltoFrame() { return altoFrame; }
+float Animacion::getXFrame() { return xFrame; }
+float Animacion::getYFrame() { return yFrame; }
 float Animacion::getVelocidad() { return velocidad; }
-int Animacion::getFilaFrame() { return filaFrame; }
-int Animacion::getColumnaFrame() { return columnaFrame; }
+int Animacion::getFilaFrame() { return filas; }
+int Animacion::getColumnaFrame() { return columnas; }
+sf::IntRect Animacion::frameActual() { return rects[(int)yFrame][(int)xFrame]; }
 
-void Animacion::setTipoMovimiento(Movimiento type) { tipoMovimiento = type; }
-void Animacion::setAncho(int value) { ancho = value; }
-void Animacion::setAlto(int value) { alto = value; }
-void Animacion::setIFrame(float value) { iFrame = value; }
-void Animacion::setJFrame(float value) { jFrame = value; }
+void Animacion::setMovimiento(TipoMovimiento type) { movimiento = type; }
+void Animacion::setAnchoFrame(int value) { anchoFrame = value; }
+void Animacion::setAltoFrame(int value) { altoFrame = value; }
+void Animacion::setXFrame(float value) { xFrame = value; }
+void Animacion::setYFrame(float value) { yFrame = value; }
 void Animacion::setVelocidad(float value) { velocidad = value; }
-void Animacion::setFilaFrame(int value) { filaFrame = value; }
-void Animacion::setColumnaFrame(int value) { columnaFrame = value; }
+void Animacion::setFilaFrame(int value) { filas = value; }
+void Animacion::setColumnaFrame(int value) { columnas = value; }
 
 sf::IntRect Animacion::update(TipoEntidad type) {
-	if (type == TipoEntidad::GENERAL) {
-
-	}
-	else if (type == TipoEntidad::JUGADOR) {
-		switch (tipoMovimiento)
+	if (type == TipoEntidad::JUGADOR) {
+		switch (movimiento)
 		{
-		case Movimiento::NINGUNO:
-			jFrame = 1;
+		case TipoMovimiento::NINGUNO:
+			xFrame = 1;
 			break;
-		case Movimiento::ARRIBA:
-			iFrame = 3;
-			jFrame += velocidad;
+		case TipoMovimiento::ARRIBA:
+			yFrame = 3;
+			xFrame += velocidad;
 			break;
-		case Movimiento::ABAJO:
-			iFrame = 0;
-			jFrame += velocidad;
+		case TipoMovimiento::ABAJO:
+			yFrame = 0;
+			xFrame += velocidad;
 			break;
-		case Movimiento::DERECHA:
-			iFrame = 2;
-			jFrame += velocidad;
+		case TipoMovimiento::DERECHA:
+			yFrame = 2;
+			xFrame += velocidad;
 			break;
-		case Movimiento::IZQUIERDA:
-			iFrame = 1;
-			jFrame += velocidad;
+		case TipoMovimiento::IZQUIERDA:
+			yFrame = 1;
+			xFrame += velocidad;
 			break;
 		}
-		if (jFrame + velocidad > columnaFrame)
-			jFrame = 0;
 	}
 	else if (type == TipoEntidad::ENEMIGO) {
-		switch (tipoMovimiento)
+		switch (movimiento)
 		{
-		case Movimiento::NINGUNO:
-			jFrame = 1;
+		case TipoMovimiento::NINGUNO:
+			xFrame = 1;
 			break;
-		case Movimiento::ARRIBA:
-			iFrame = 2;
-			jFrame += velocidad;
+		case TipoMovimiento::ARRIBA:
+			yFrame = 2;
+			xFrame += velocidad;
 			break;
-		case Movimiento::ABAJO:
-			iFrame = 0;
-			jFrame += velocidad;
+		case TipoMovimiento::ABAJO:
+			yFrame = 0;
+			xFrame += velocidad;
 			break;
-		case Movimiento::DERECHA:
-			iFrame = 1;
-			jFrame += velocidad;
+		case TipoMovimiento::DERECHA:
+			yFrame = 1;
+			xFrame += velocidad;
 			break;
-		case Movimiento::IZQUIERDA:
-			iFrame = 3;
-			jFrame += velocidad;
+		case TipoMovimiento::IZQUIERDA:
+			yFrame = 3;
+			xFrame += velocidad;
 			break;
 		default:
 			break;
 		}
-		if (jFrame + velocidad > columnaFrame)
-			jFrame = 0;
 	}
 
-	return rects[(int)iFrame][(int)jFrame];
+	if (xFrame + velocidad > columnas)
+		xFrame = 0;
+
+	return rects[(int)yFrame][(int)xFrame];
+}
+
+sf::IntRect Animacion::update() {
+	
+	xFrame += velocidad;
+	if (xFrame + velocidad > columnas) {
+		xFrame = 0;
+		yFrame++;
+		if (yFrame >= filas)
+			yFrame = 0;
+	}
+	
+	return rects[(int)yFrame][(int)xFrame];
+}
+
+bool Animacion::secuenciaFinalizada() {
+	return xFrame == columnas - 1 && yFrame == filas - 1;
 }

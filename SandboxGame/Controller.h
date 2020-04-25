@@ -14,8 +14,9 @@ private:
 	sf::Texture* tTerrenos;
 	sf::Texture* tEnemigos;
 	sf::Texture* tNaturaleza;
+	sf::Texture tCofre;
 public:
-	Controller(sf::Texture &tJugador, sf::Texture* tTerreno, sf::Texture* tEnemigos, sf::Texture* tNaturaleza);
+	Controller(sf::Texture &tJugador, sf::Texture* tTerreno, sf::Texture* tEnemigos, sf::Texture* tNaturaleza, sf::Texture &tCofre);
 	~Controller();
 
 	int getIndiceMapa();
@@ -27,4 +28,5 @@ public:
 	void agregar_mapa(TipoTerreno tipo);
 	void mapa_siguiente();
 	void mapa_anterior();
+	void jugadorAbreCofre();
 };

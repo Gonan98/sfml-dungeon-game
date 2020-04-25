@@ -37,7 +37,12 @@ int main()
     tEnemigos[3].loadFromFile("recursos/espectro.png");
     tEnemigos[4].loadFromFile("recursos/segador.png");
 
-    Controller* juego = new Controller(tJugador1, tTerreno, tEnemigos, tNaturaleza);
+    Texture tCofre;
+    tCofre.loadFromFile("recursos/chests_sprite.png");
+    //Sprite sCofre(tCofre);
+
+    Controller* juego = new Controller(tJugador1, tTerreno, tEnemigos, tNaturaleza, tCofre);
+    //Cofre* cofre = new Cofre(new Animacion(48, 48, 4, 3, 1.f), tCofre, 48, 56, false);
 
     while (window.isOpen())
     {
@@ -53,18 +58,21 @@ int main()
             if (event.key.code == sf::Keyboard::V) {
                 juego->mapa_siguiente();
             }
+            if (event.key.code == sf::Keyboard::A) {
+                juego->jugadorAbreCofre();
+            }
         }
 
         if (Keyboard::isKeyPressed(Keyboard::Up))
-            juego->getJugador1()->getAnimacion()->setTipoMovimiento(Movimiento::ARRIBA);
+            juego->getJugador1()->getAnimacion()->setMovimiento(TipoMovimiento::ARRIBA);
         else if (Keyboard::isKeyPressed(Keyboard::Down))
-            juego->getJugador1()->getAnimacion()->setTipoMovimiento(Movimiento::ABAJO);
+            juego->getJugador1()->getAnimacion()->setMovimiento(TipoMovimiento::ABAJO);
         else if (Keyboard::isKeyPressed(Keyboard::Right))
-            juego->getJugador1()->getAnimacion()->setTipoMovimiento(Movimiento::DERECHA);
+            juego->getJugador1()->getAnimacion()->setMovimiento(TipoMovimiento::DERECHA);
         else if (Keyboard::isKeyPressed(Keyboard::Left))
-            juego->getJugador1()->getAnimacion()->setTipoMovimiento(Movimiento::IZQUIERDA);
+            juego->getJugador1()->getAnimacion()->setMovimiento(TipoMovimiento::IZQUIERDA);
         else
-            juego->getJugador1()->getAnimacion()->setTipoMovimiento(Movimiento::NINGUNO);
+            juego->getJugador1()->getAnimacion()->setMovimiento(TipoMovimiento::NINGUNO);
 
         if (Keyboard::isKeyPressed(Keyboard::Z)) {
             juego->agregar_mapa(TipoTerreno(rand() % 4));
@@ -72,8 +80,9 @@ int main()
         }
 
         juego->dibujar_todo(window);
+        //cofre->dibujar(window);
+        //window.draw(sCofre);
         window.display();
     }
-
     return 0;
 }
