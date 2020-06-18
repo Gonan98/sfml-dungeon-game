@@ -5,7 +5,7 @@ enum class TipoEnemigo {ORCO, ESQUELETO, MURCIELAGO, ESPECTRO, SEGADOR};
 
 class Enemigo : public Entidad{
 protected:
-	int daño;
+	int daÃ±o;
 	int vida;
 	TipoEnemigo tipo;
 	void direccion_contra(TipoMovimiento tipo);
@@ -14,11 +14,11 @@ public:
 	Enemigo(Animacion* animacion, sf::Texture &t, TipoEnemigo tipo, int x, int y);
 	~Enemigo();
 
-	int getDaño();
+	int getDaÃ±o();
 	int getVida();
 	TipoEnemigo getTipo();
 
-	void setDaño(int value);
+	void setDaÃ±o(int value);
 	void setVida(int value);
 
 	void dibujar(sf::RenderWindow& w, int** matriz);

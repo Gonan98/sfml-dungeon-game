@@ -1,50 +1,50 @@
 #include "Enemigo.h"
 
 Enemigo::Enemigo() : Entidad(){
-	daño = 0;
+	daÃ±o = 0;
 	vida = 5;
 	tipo = TipoEnemigo::ORCO;
 }
 Enemigo::Enemigo(Animacion* animacion, sf::Texture &t, TipoEnemigo tipo, int x, int y) : Entidad(animacion, t, x, y) {
 	vida = 5;
-	daño = 0;
+	daÃ±o = 0;
 	this->tipo = tipo;
 	switch (this->tipo)
 	{
 	case TipoEnemigo::ORCO:
 		vida = 15;
-		daño = 3;
+		daÃ±o = 3;
 		dx = dy = 6;
 		break;
 	case TipoEnemigo::ESQUELETO:
 		vida = 10;
-		daño = 3;
+		daÃ±o = 3;
 		dx = dy = 6;
 		break;
 	case TipoEnemigo::MURCIELAGO:
 		vida = 5;
-		daño = 2;
+		daÃ±o = 2;
 		dx = dy = 12;
 		break;
 	case TipoEnemigo::ESPECTRO:
 		vida = 10;
-		daño = 4;
+		daÃ±o = 4;
 		dx = dy = 8;
 		break;
 	case TipoEnemigo::SEGADOR:
 		vida = 10;
-		daño = 5;
+		daÃ±o = 5;
 		dx = dy = 8;
 		break;
 	}
 }
 Enemigo::~Enemigo(){}
 
-int Enemigo::getDaño() { return daño; }
+int Enemigo::getDaÃ±o() { return daÃ±o; }
 int Enemigo::getVida() { return vida; }
 TipoEnemigo Enemigo::getTipo() { return tipo; }
 
-void Enemigo::setDaño(int value) { daño = value; }
+void Enemigo::setDaÃ±o(int value) { daÃ±o = value; }
 void Enemigo::setVida(int value) { vida = value; }
 
 void Enemigo::dibujar(sf::RenderWindow& w, int** matriz){

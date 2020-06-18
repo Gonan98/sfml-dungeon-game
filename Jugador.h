@@ -24,6 +24,6 @@ public:
 
 	void dibujar(sf::RenderWindow &w, int** matriz);
 	void mover(int** matriz);
-	void dañar(int daño);
+	void daÃ±ar(int daÃ±o);
 	bool interactuar(int** matriz);
 };

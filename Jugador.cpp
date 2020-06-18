@@ -61,8 +61,8 @@ void Jugador::mover(int** matriz) {
 	sprite.setPosition((float)x, (float)y);
 }
 
-void Jugador::dañar(int daño) {
-	vidas -= daño;
+void Jugador::daÃ±ar(int daÃ±o) {
+	vidas -= daÃ±o;
 	if (vidas < 0)
 		vidas = 0;
 }
