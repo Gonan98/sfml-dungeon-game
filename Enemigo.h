@@ -1,27 +1,26 @@
-#pragma once
-#include "Entidad.h"
+#ifndef _ENEMIGO_H_
+#define _ENEMIGO_H_
 
-enum class TipoEnemigo {ORCO, ESQUELETO, MURCIELAGO, ESPECTRO, SEGADOR};
+#include "Entidad.h"
 
 class Enemigo : public Entidad{
 protected:
-	int daño;
+	int damage;
 	int vida;
-	TipoEnemigo tipo;
-	void direccion_contra(TipoMovimiento tipo);
+	int resistenciaFisica;
+	int resistenciaMagica;
 public:
 	Enemigo();
-	Enemigo(Animacion* animacion, sf::Texture &t, TipoEnemigo tipo, int x, int y);
 	~Enemigo();
 
-	int getDaño();
+	int getDamage();
 	int getVida();
-	TipoEnemigo getTipo();
 
-	void setDaño(int value);
+	void setDamage(int value);
 	void setVida(int value);
 
-	void dibujar(sf::RenderWindow& w, int** matriz);
-	void mover(int** matriz);
-	void direccion_random();
+	void dibujar(sf::RenderWindow& w);
+	void mover();
 };
+
+#endif

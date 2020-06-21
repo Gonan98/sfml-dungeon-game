@@ -1,32 +1,6 @@
-#pragma once
-#include "Mapa.h"
-#include "Jugador.h"
+#ifndef _CONTROLLER_H_
+#define _CONTROLLER_H_
 
-enum class Dificultad { FACIL, MEDIO, DIFICIL };
 
-class Controller {
-private:
-	std::vector<Mapa*> mapas;
-	int indiceMapa;
-	Jugador* player1;
-	Dificultad diff;
-	sf::Texture tPlayer;
-	sf::Texture* tTerrenos;
-	sf::Texture* tEnemigos;
-	sf::Texture* tNaturaleza;
-	sf::Texture tCofre;
-public:
-	Controller(sf::Texture &tJugador, sf::Texture* tTerreno, sf::Texture* tEnemigos, sf::Texture* tNaturaleza, sf::Texture &tCofre);
-	~Controller();
 
-	int getIndiceMapa();
-	Dificultad getDIff();
-	std::vector<Mapa*> getMapas();
-	Jugador* getJugador1();
-	
-	void dibujar_todo(sf::RenderWindow& w);
-	void agregar_mapa(TipoTerreno tipo);
-	void mapa_siguiente();
-	void mapa_anterior();
-	void jugadorAbreCofre();
-};
+#endif
