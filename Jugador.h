@@ -12,7 +12,7 @@ private:
 	std::string nombre;
 public:
 	Jugador();
-	Jugador(sf::Texture& t, std::string nombre);
+	Jugador(Texture& t, Animacion* animacion, std::string nombre, float x, float y, float dx, float dy);
 	~Jugador();
 
 	int getVidas();
@@ -24,7 +24,7 @@ public:
 	void setNombre(std::string);
 
 	void dibujar(sf::RenderWindow &w);
-	void mover();
+	void mover(Direccion dir);
 	void hurt(int damage);
 	bool interactuar();
 };

@@ -7,11 +7,11 @@ class Enemigo : public Entidad{
 protected:
 	int damage;
 	int vida;
-	int resistenciaFisica;
-	int resistenciaMagica;
 public:
 	Enemigo();
-	~Enemigo();
+	Enemigo(Texture& t, Animacion* animacion, float x, float y);
+	Enemigo(Texture& t, Animacion* animacion, float x, float y, float dx, float dy);
+	virtual ~Enemigo();
 
 	int getDamage();
 	int getVida();
@@ -19,8 +19,8 @@ public:
 	void setDamage(int value);
 	void setVida(int value);
 
-	void dibujar(sf::RenderWindow& w);
-	void mover();
+	void dibujar(RenderWindow& w);
+	void mover(Direccion dir);
 };
 
 #endif

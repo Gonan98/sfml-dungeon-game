@@ -1,9 +1,8 @@
 #ifndef _ENTIDAD_H_
 #define _ENTIDAD_H_
 
-#include <SFML/Graphics.hpp>
+#include "Animacion.h"
 
-enum Direccion { ARRIBA, ABAJO, DERECHA, IZQUIERDA };
 enum Estado { REPOSO, MOVIMIENTO };
 
 class Entidad {
@@ -14,12 +13,15 @@ protected:
 	float h;
 	float dx;
 	float dy;
-	sf::Sprite sprite;
+	Animacion* animacion;
+	Sprite sprite;
 	Direccion direccion;
 	Estado estado;
 public:
 	Entidad();
-	Entidad(sf::Texture& t, float x, float y, float dx, float dy);
+	Entidad(Texture& t, float x, float y, float dx, float dy);
+	Entidad(Texture& t, Animacion* animacion, float x, float y);
+	Entidad(Texture& t, Animacion* animacion, float x, float y, float dx, float dy);
 	virtual ~Entidad();
 
 	float getX();
@@ -37,7 +39,7 @@ public:
 	void setDy(float value);
 	
 	virtual void dibujar(sf::RenderWindow &w);
-	virtual void mover();
+	virtual void mover(Direccion dir);
 };
 
 #endif

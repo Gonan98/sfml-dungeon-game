@@ -6,13 +6,13 @@ Jugador::Jugador() : Entidad(){
 	nombre = "Player";
 }
 
-Jugador::Jugador(sf::Texture& t, std::string nombre) : Entidad(t, x, y, dx, dy) {
+Jugador::Jugador(Texture& t, Animacion* animacion, std::string nombre, float x, float y, float dx, float dy) : Entidad(t, animacion, x, y, dx, dy) {
 	vidas = 20;
 	puntaje = 0;
 	this->nombre = nombre;
 }
 
-Jugador::~Jugador(){}
+Jugador::~Jugador() {}
 
 int Jugador::getVidas() { return vidas; }
 int Jugador::getPuntaje() { return puntaje; }
@@ -23,11 +23,29 @@ void Jugador::setPuntaje(int value) { puntaje = value; }
 void Jugador::setNombre(std::string value) { nombre = value; }
 
 void Jugador::dibujar(sf::RenderWindow &w) {
+	sprite.setTextureRect(animacion->rectActual());
 	w.draw(sprite);
 }
 
-void Jugador::mover() {
-	
+void Jugador::mover(Direccion dir) {
+	switch(dir) {
+		case Direccion::ARRIBA:
+			y -= dy;
+			break;
+		case Direccion::ABAJO:
+			y += dy;
+			break;
+		case Direccion::DERECHA:
+			x += dx;
+			break;
+		case Direccion::IZQUIERDA:
+			x -= dx;
+			break;
+		default:
+			break;
+	}
+	sprite.setPosition(x,y);
+	animacion->update(dir);
 }
 
 void Jugador::hurt(int damage) {
