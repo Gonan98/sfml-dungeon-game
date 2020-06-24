@@ -1,42 +1,45 @@
-#pragma once
+#ifndef _ENTIDAD_H_
+#define _ENTIDAD_H_
+
 #include "Animacion.h"
-#include "Hitbox.h"
+
+enum Estado { REPOSO, MOVIMIENTO };
 
 class Entidad {
 protected:
-	int x;
-	int y;
-	int w;
-	int h;
-	int dx;
-	int dy;
-	sf::Sprite sprite;
+	float x;
+	float y;
+	float w;
+	float h;
+	float dx;
+	float dy;
 	Animacion* animacion;
-	sf::IntRect hitbox;
+	Sprite sprite;
+	Direccion direccion;
+	Estado estado;
 public:
 	Entidad();
-	Entidad(Animacion* animacion, sf::Texture &t, int x, int y);
-	Entidad(Animacion* animacion, sf::Texture& t, int x, int y, sf::IntRect hitbox);
-	Entidad(Animacion* animacion, sf::Texture& t, int x, int y, int w, int h);
+	Entidad(Texture& t, float x, float y, float dx, float dy);
+	Entidad(Texture& t, Animacion* animacion, float x, float y);
+	Entidad(Texture& t, Animacion* animacion, float x, float y, float dx, float dy);
 	virtual ~Entidad();
 
-	Animacion* getAnimacion();
-	sf::IntRect getHitbox();
-	int getX();
-	int getY();
-	int getW();
-	int getH();
-	int getDx();
-	int getDy();
+	float getX();
+	float getY();
+	float getW();
+	float getH();
+	float getDx();
+	float getDy();
 
-	void setX(int value);
-	void setY(int value);
-	void setW(int value);
-	void setH(int value);
-	void setDx(int value);
-	void setDy(int value);
-	void setHitbox(sf::IntRect hit);
+	void setX(float value);
+	void setY(float value);
+	void setW(float value);
+	void setH(float value);
+	void setDx(float value);
+	void setDy(float value);
 	
-	virtual void dibujar(sf::RenderWindow &w, int** matriz);
-	virtual void mover(int** matriz);
+	virtual void dibujar(sf::RenderWindow &w);
+	virtual void mover(Direccion dir);
 };
+
+#endif

@@ -1,29 +1,36 @@
-#pragma once
+#ifndef _NATURALEZA_H_
+#define _NATURALEZA_H_
+
 #include "SFML/Graphics.hpp"
 
-enum class TipoNatural { ARBOL, MONTE, ROCA, PIEDRA };
+using namespace sf;
 
 class Naturaleza {
 protected:
-	int x;
-	int y;
-	int w;
-	int h;
-	sf::Sprite sprite;
+	float x1;
+	float y1;
+	float x2;
+	float y2;
+	float w;
+	float h;
+	Sprite sprite;
 public:
 	Naturaleza();
-	Naturaleza(sf::Texture* t, TipoNatural tipo, int x, int y);
+	Naturaleza(Texture& t, float x, float y, float w, float h);
 	~Naturaleza();
 
-	int getX();
-	int getY();
-	int getAncho();
-	int getAlto();
+	float getX();
+	float getY();
+	float getAncho();
+	float getAlto();
 
-	void setX(int value);
-	void setY(int value);
-	void setAncho(int value);
-	void setAlto(int value);
+	void setX(float value);
+	void setY(float value);
+	void setAncho(float value);
+	void setAlto(float value);
 
-	void dibujar(sf::RenderWindow& w);
+	virtual void dibujarInferior(RenderWindow& w);
+	virtual void dibujarSuperior(RenderWindow& w);
 };
+
+#endif

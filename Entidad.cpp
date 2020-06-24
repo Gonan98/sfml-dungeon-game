@@ -1,74 +1,72 @@
 #include "Entidad.h"
 
 Entidad::Entidad(){
-	x = 0;
-	y = 0;
-	w = 48;
-	h = 48;
-	dx = 0;
-	dy = 0;
+	x = 0.f;
+	y = 0.f;
+	w = 48.f;
+	h = 48.f;
+	dx = 8.f;
+	dy = 8.f;
+	estado = REPOSO;
+	direccion = ABAJO;
 	animacion = new Animacion();
-	hitbox = sf::IntRect(0, 0, 0, 0);
 }
 
-Entidad::Entidad(Animacion* animacion, sf::Texture& t, int x, int y) {
-	this->x = x;
-	this->y = y;
-	w = h = 48;
-	dx = dy = 8;
-	this->hitbox = sf::IntRect(x, y + h / 2, w, h / 2);
-	this->animacion = animacion;
-	this->sprite.setTexture(t);
-	this->sprite.setTextureRect(this->animacion->frameActual());
-}
-
-Entidad::Entidad(Animacion* animacion, sf::Texture& t, int x, int y, sf::IntRect hitbox) {
+Entidad::Entidad(Texture& t, Animacion* animacion, float x, float y) {
 	this->animacion = animacion;
 	this->x = x;
 	this->y = y;
-	w = h = 48;
-	dx = dy = 8;
-	this->hitbox = hitbox;
-	this->sprite.setTexture(t);
-	this->sprite.setTextureRect(this->animacion->frameActual());
+	estado = REPOSO;
+	direccion = ABAJO;
+	sprite.setTexture(t);
+	sprite.setPosition(x,y);
 }
 
-Entidad::Entidad(Animacion* animacion, sf::Texture& t, int x, int y, int w, int h) {
+Entidad::Entidad(sf::Texture& t, float x, float y, float dx, float dy) {
 	this->x = x;
 	this->y = y;
-	this->w = w;
-	this->h = h;
-	this->dx = 8;
-	this->dy = 8;
+	this->dx = dx;
+	this->dy = dy;
+	estado = REPOSO;
+	direccion = ABAJO;
+	sprite.setTexture(t);
+	sprite.setPosition(x,y);
+}
+
+Entidad::Entidad(Texture& t, Animacion* animacion, float x, float y, float dx, float dy) {
+	this->x = x;
+	this->y = y;
+	this->dx = dx;
+	this->dy = dy;
 	this->animacion = animacion;
-	this->hitbox = sf::IntRect(x, y + h / 2, w, h / 2);
-	this->sprite.setTexture(t);
-	this->sprite.setTextureRect(this->animacion->frameActual());
-}
-Entidad::~Entidad() { delete animacion; }
-
-Animacion* Entidad::getAnimacion() { return animacion; }
-sf::IntRect Entidad::getHitbox() { return hitbox; }
-int Entidad::getX() { return x; }
-int Entidad::getY() { return y; }
-int Entidad::getW() { return w; }
-int Entidad::getH() { return h; }
-int Entidad::getDx() { return dx; }
-int Entidad::getDy() { return dy; }
-
-void Entidad::setX(int value) { x = value; }
-void Entidad::setY(int value) { y = value; }
-void Entidad::setW(int value) { w = value; }
-void Entidad::setH(int value) { h = value; }
-void Entidad::setDx(int value) { dx = value; }
-void Entidad::setDy(int value) { dy = value; }
-
-void Entidad::setHitbox(sf::IntRect hit) { hitbox = hit; }
-
-void Entidad::dibujar(sf::RenderWindow& w, int** matriz) {
-
+	estado = REPOSO;
+	direccion = ABAJO;
+	sprite.setTexture(t);
+	sprite.setPosition(x,y);
 }
 
-void Entidad::mover(int** matriz) {
+Entidad::~Entidad() {
+	delete animacion;
+}
+
+float Entidad::getX() { return x; }
+float Entidad::getY() { return y; }
+float Entidad::getW() { return w; }
+float Entidad::getH() { return h; }
+float Entidad::getDx() { return dx; }
+float Entidad::getDy() { return dy; }
+
+void Entidad::setX(float value) { x = value; }
+void Entidad::setY(float value) { y = value; }
+void Entidad::setW(float value) { w = value; }
+void Entidad::setH(float value) { h = value; }
+void Entidad::setDx(float value) { dx = value; }
+void Entidad::setDy(float value) { dy = value; }
+
+void Entidad::dibujar(sf::RenderWindow& w) {
+	w.draw(sprite);
+}
+
+void Entidad::mover(Direccion dir) {
 
 }

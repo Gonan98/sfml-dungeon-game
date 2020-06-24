@@ -1,46 +1,42 @@
-#pragma once
+#ifndef _ANIMACION_H_
+#define _ANIMACION_H_
+
 #include "SFML/Graphics.hpp"
 
-enum class TipoMovimiento { NINGUNO, ARRIBA, ABAJO, DERECHA, IZQUIERDA };
-enum class TipoEntidad { GENERAL, JUGADOR, ENEMIGO };
+using namespace sf;
+
+enum Direccion { ARRIBA, ABAJO, DERECHA, IZQUIERDA };
 
 class Animacion {
 private:
-	float xFrame;
-	float yFrame;
-	float velocidad;
-	int anchoFrame;
-	int altoFrame;
-	int filas;
-	int columnas;
-	sf::IntRect** rects;
-	TipoMovimiento movimiento;
+    int filaArriba;
+    int filaAbajo;
+    int filaDerecha;
+    int filaIzquierda;
+    int filas;
+    int columnas;
+    float framePosX;
+    float framePosY;
+    int frames;
+    float velocidad;
+    IntRect** rects;
 public:
-	Animacion();
-	Animacion(int anchoFrame, int altoFrame, int filas, int columnas, float velocidad);
-	Animacion(int anchoFrame, int altoFrame, int xFrame, float yFrame, int filas, int columnas, float velocidad);
-	~Animacion();
+    Animacion();
+    Animacion(int frames, int filas, int columnas, float velocidad);
+    Animacion(int frames, int filas, int columnas, float velocidad, int filaArriba, int filaAbajo, int filaDerecha, int filaIzquierda);
+    ~Animacion();
 
-	TipoMovimiento getMovimiento();
-	int getAnchoFrame();
-	int getAltoFrame();
-	float getXFrame();
-	float getYFrame();
-	float getVelocidad();
-	int getFilaFrame();
-	int getColumnaFrame();
-	sf::IntRect frameActual();
-	void setMovimiento(TipoMovimiento type);
-	void setAnchoFrame(int value);
-	void setAltoFrame(int value);
-	void setXFrame(float value);
-	void setYFrame(float value);
-	void setVelocidad(float value);
-	void setFilaFrame(int value);
-	void setColumnaFrame(int value);
+    int getFrames();
+    float getVelocidad();
+    IntRect** getRects();
+    IntRect rectActual();
 
-	bool secuenciaFinalizada();
+    void setFrames(int value);
+    void setVelocidad(float value);
+    void setRects(IntRect** values);
 
-	sf::IntRect update(TipoEntidad type);
-	sf::IntRect update();
+    void update();
+    void update(Direccion dir);
 };
+
+#endif

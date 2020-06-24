@@ -1,54 +1,39 @@
 #include "Naturaleza.h"
 
 Naturaleza::Naturaleza(){
-	x = 0;
-	y = 0;
+	x1 = 0;
+	y1 = 0;
+	x2 = 24;
+	y2 = 24;
 	w = 48;
 	h = 48;
 }
-Naturaleza::Naturaleza(sf::Texture* t, TipoNatural tipo, int x, int y){
-	switch (tipo)
-	{
-	case TipoNatural::ARBOL:
-		sprite.setTexture(t[0]);
-		w = 48;
-		h = 144;
-		break;
-	case TipoNatural::MONTE:
-		sprite.setTexture(t[1]);
-		w = 144;
-		h = 96;
-		break;
-	case TipoNatural::ROCA:
-		sprite.setTexture(t[2]);
-		w = 96;
-		h = 48;
-		break;
-	case TipoNatural::PIEDRA:
-		sprite.setTexture(t[3]);
-		w = h = 48;
-		break;
-	default:
-		sprite.setTexture(t[3]);
-		w = h = 48;
-		break;
-	}
-	this->x = x;
-	this->y = y;
+
+Naturaleza::Naturaleza(Texture& t, float x, float y, float w, float h) {
+	this->x1 = x;
+	this->y1 = y;
+	this->w = w;
+	this->h = h;
+	this->x2 = x;
+	sprite.setTexture(t);
+	sprite.setPosition(x,y);
 }
+
 Naturaleza::~Naturaleza(){}
 
-int Naturaleza::getX() { return x; }
-int Naturaleza::getY() { return y; }
-int Naturaleza::getAncho() { return w; }
-int Naturaleza::getAlto() { return h; }
+float Naturaleza::getX() { return x1; }
+float Naturaleza::getY() { return y1; }
+float Naturaleza::getAncho() { return w; }
+float Naturaleza::getAlto() { return h; }
 
-void Naturaleza::setX(int value) { x = value; }
-void Naturaleza::setY(int value) { y = value; }
-void Naturaleza::setAncho(int value) { w = value; }
-void Naturaleza::setAlto(int value) { h = value; }
+void Naturaleza::setX(float value) { x1 = value; }
+void Naturaleza::setY(float value) { y1 = value; }
+void Naturaleza::setAncho(float value) { w = value; }
+void Naturaleza::setAlto(float value) { h = value; }
 
-void Naturaleza::dibujar(sf::RenderWindow& w) {
-	sprite.setPosition((float)x, (float)y);
-	w.draw(sprite);
+void Naturaleza::dibujarInferior(RenderWindow& w) {
+
+}
+void Naturaleza::dibujarSuperior(RenderWindow& w) {
+
 }
