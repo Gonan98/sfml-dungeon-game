@@ -13,6 +13,7 @@
 #include "Roca.h"
 #include "Piedra.h"
 #include "Mapa.h"
+#include "ListaEnemigos.h"
 
 using namespace sf;
 
@@ -49,34 +50,44 @@ int main() {
 
     Texture tCofre;
     tCofre.loadFromFile("resources/chests_sprite.png");
-
-
+    
     Animacion* aJugador = new Animacion(12, 4, 3, 0.2f, 3, 0, 2, 1);
-    Animacion* animacionOrco = new Animacion(12, 4, 3, 0.2f, 2, 0, 1, 3);
-    Animacion* animacionEsqueleto = new Animacion(12, 4, 3, 0.2f, 2, 0, 1, 3);
-    Animacion* animacionSegador = new Animacion(12, 4, 3, 0.2f, 2, 0, 1, 3);
-    Animacion* animacionMurcielago = new Animacion(12, 4, 3, 0.2f, 2, 0, 1, 3);
-    Animacion* animacionEspectro = new Animacion(12, 4, 3, 0.2f, 2, 0, 1, 3);
 
     Jugador* jugador = new Jugador(tJugador1, aJugador, "Andre", 0, 0, 8 , 8);
-    Orco* orco = new Orco(tEnemigos[0], animacionOrco, 600, 350);
-    Esqueleto* esqueleto = new Esqueleto(tEnemigos[1], animacionEsqueleto, 600, 350);
-    Murcielago* murcielago = new Murcielago(tEnemigos[2], animacionMurcielago, 600, 350);
-    Espectro* espectro = new Espectro(tEnemigos[3], animacionEspectro, 600, 350);
-    Segador* segador = new Segador(tEnemigos[4], animacionSegador, 600, 350);
     Arbol* arbol = new Arbol(tNaturaleza[0], 200, 200, 0, 0);
     Monte* monte = new Monte(tNaturaleza[1], 100, 400, 0, 0);
     Roca* roca = new Roca(tNaturaleza[2], 500, 500, 0, 0);
     Piedra* piedra = new Piedra(tNaturaleza[3], 700, 200, 0, 0);
     Mapa* mapa = new Mapa(tTerreno[0]);
+    ListaEnemigos* enemies = new ListaEnemigos();
+
+    for (int i = 0; i < 10; i++) {
+        switch (rand()%4) {
+        case 0:
+            enemies->agregar(new Orco(tEnemigos[0], new Animacion(12, 4, 3, 0.2f, 2, 0, 1, 3), 600, 350));
+            break;
+        case 1:
+            enemies->agregar(new Esqueleto(tEnemigos[1], new Animacion(12, 4, 3, 0.2f, 2, 0, 1, 3), 600, 350));
+            break;
+        case 2:
+            enemies->agregar(new Murcielago(tEnemigos[2], new Animacion(12, 4, 3, 0.2f, 2, 0, 1, 3), 600, 350));
+            break;
+        case 3:
+            enemies->agregar(new Espectro(tEnemigos[3], new Animacion(12, 4, 3, 0.2f, 2, 0, 1, 3), 600, 350));
+            break;
+        case 4:
+            enemies->agregar(new Segador(tEnemigos[4], new Animacion(12, 4, 3, 0.2f, 2, 0, 1, 3), 600, 350));
+            break;
+        default:
+            break;
+        }
+    }
 
     Clock clock;
-    Direccion* direcciones = new Direccion[5];
-    direcciones[0] = DERECHA;
-    direcciones[1] = DERECHA;
-    direcciones[2] = DERECHA;
-    direcciones[3] = DERECHA;
-    direcciones[4] = DERECHA;
+    Direccion* direcciones = new Direccion[enemies->getTotal()];
+    for (int i = 0; i < enemies->getTotal(); i++) {
+        direcciones[i] = DERECHA;
+    }
     while (window.isOpen())
     {
         Event event;
@@ -97,55 +108,41 @@ int main() {
             jugador->mover(IZQUIERDA);
 
         if (clock.getElapsedTime().asSeconds() > 1) {
-            direcciones[0] = Direccion(rand()%4);
-            direcciones[1] = Direccion(rand()%4);
-            direcciones[2] = Direccion(rand()%4);
-            direcciones[3] = Direccion(rand()%4);
-            direcciones[4] = Direccion(rand()%4);
+            for (int i = 0; i < enemies->getTotal(); i++) {
+                direcciones[i] = Direccion(rand()%4);
+            }
             clock.restart();
         }
-
-        orco->mover(direcciones[0]);
-        esqueleto->mover(direcciones[1]);
-        murcielago->mover(direcciones[2]);
-        espectro->mover(direcciones[3]);
-        segador->mover(direcciones[4]);
+        enemies->mover(direcciones);
 
         window.clear();
+
         mapa->dibujar(window);
+
         arbol->dibujarInferior(window);
         monte->dibujarInferior(window);
         roca->dibujarInferior(window);
         piedra->dibujarInferior(window);
+
         jugador->dibujar(window);
-        orco->dibujar(window);
-        esqueleto->dibujar(window);
-        murcielago->dibujar(window);
-        espectro->dibujar(window);
-        segador->dibujar(window);
+
+        enemies->dibujar(window);
+
         arbol->dibujarSuperior(window);
         monte->dibujarSuperior(window);
         roca->dibujarSuperior(window);
         piedra->dibujarSuperior(window);
+
         window.display();
     }
 
+    delete enemies;
     delete jugador;
-    delete orco;
-    delete esqueleto;
-    delete segador;
-    delete murcielago;
-    delete espectro;
     delete arbol;
     delete monte;
     delete roca;
     delete piedra;
     delete aJugador;
-    delete animacionOrco;
-    delete animacionEsqueleto;
-    delete animacionSegador;
-    delete animacionMurcielago;
-    delete animacionEspectro;
     delete[] tEnemigos;
     delete[] tNaturaleza;
     delete[] tTerreno;
