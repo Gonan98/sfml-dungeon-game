@@ -3,15 +3,6 @@
 #include <cstdlib>
 
 #include "Jugador.h"
-#include "Orco.h"
-#include "Segador.h"
-#include "Espectro.h"
-#include "Murcielago.h"
-#include "Esqueleto.h"
-#include "Arbol.h"
-#include "Monte.h"
-#include "Roca.h"
-#include "Piedra.h"
 #include "Mapa.h"
 #include "ListaEnemigos.h"
 
@@ -58,10 +49,10 @@ int main() {
     Monte* monte = new Monte(tNaturaleza[1], 100, 400, 0, 0);
     Roca* roca = new Roca(tNaturaleza[2], 500, 500, 0, 0);
     Piedra* piedra = new Piedra(tNaturaleza[3], 700, 200, 0, 0);
-    Mapa* mapa = new Mapa(tTerreno[0]);
+    Mapa* mapa = new Mapa(tTerreno[0], tNaturaleza, tEnemigos);
     ListaEnemigos* enemies = new ListaEnemigos();
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 5; i++) {
         switch (rand()%4) {
         case 0:
             enemies->agregar(new Orco(tEnemigos[0], new Animacion(12, 4, 3, 0.2f, 2, 0, 1, 3), 600, 350));
@@ -118,6 +109,7 @@ int main() {
         window.clear();
 
         mapa->dibujar(window);
+        mapa->dibujarNaturalezaInferior(window);
 
         arbol->dibujarInferior(window);
         monte->dibujarInferior(window);
@@ -128,6 +120,7 @@ int main() {
 
         enemies->dibujar(window);
 
+        mapa->dibujarNaturalezaSuperior(window);
         arbol->dibujarSuperior(window);
         monte->dibujarSuperior(window);
         roca->dibujarSuperior(window);

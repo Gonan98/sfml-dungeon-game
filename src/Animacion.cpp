@@ -23,7 +23,7 @@ Animacion::Animacion(int frames, int filas, int columnas, float velocidad) {
         rects[i] = new IntRect[columnas];
         for (int j = 0; j < columnas; j++) {
             rects[i][j] = IntRect(j*48,i*48,48,48);
-            std::cout << "(" << rects[i][j].left << ";" << rects[i][j].top << ")" << std::endl;
+            //std::cout << "(" << rects[i][j].left << ";" << rects[i][j].top << ")" << std::endl;
         }
     }
 }
