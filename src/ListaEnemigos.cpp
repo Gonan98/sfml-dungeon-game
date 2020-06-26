@@ -8,6 +8,7 @@ ListaEnemigos::~ListaEnemigos() {
     for(auto &e : lista) {
         delete e;
     }
+    lista.clear();
 }
 
 int ListaEnemigos::getTotal() { return lista.size(); }

@@ -12,6 +12,7 @@
 #include "Murcielago.h"
 #include "Segador.h"
 #include "Espectro.h"
+#include <fstream>
 
 using namespace sf;
 
@@ -37,10 +38,14 @@ public:
 	Mapa(Texture& t, Texture* tNaturaleza, Texture* tEnemigos);
 	~Mapa();
 
+	int getTotalEnemigos();
+
 	void dibujar(RenderWindow& w);
 	void dibujarNaturalezaSuperior(RenderWindow& w);
 	void dibujarNaturalezaInferior(RenderWindow& w);
+	void guardar();
 	void dibujarEnemigos(RenderWindow& w);
+	void moverEnemigos(Direccion* dir);
 };
 
 #endif

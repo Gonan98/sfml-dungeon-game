@@ -5,7 +5,10 @@ ListaNaturaleza::ListaNaturaleza() {
 }
 
 ListaNaturaleza::~ListaNaturaleza() {
-
+    for(auto &n : lista) {
+        delete n;
+    }
+    lista.clear();
 }
 
 void ListaNaturaleza::agregar(Naturaleza* n) {
