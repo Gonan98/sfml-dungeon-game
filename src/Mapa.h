@@ -46,6 +46,7 @@ public:
 	void guardar();
 	void dibujarEnemigos(RenderWindow& w);
 	void moverEnemigos(Direccion* dir);
+	void cambiarDireccionEnemigos(Direccion* dir);
 };
 
 #endif

@@ -17,9 +17,11 @@ Enemigo::~Enemigo(){}
 
 int Enemigo::getDamage() { return damage; }
 int Enemigo::getVida() { return vida; }
+Direccion Enemigo::getDireccion() { return direccion; }
 
 void Enemigo::setDamage(int value) { damage = value; }
 void Enemigo::setVida(int value) { vida = value; }
+void Enemigo::setDireccion(Direccion value) { direccion = value; }
 
 void Enemigo::dibujar(sf::RenderWindow& w){
 	sprite.setTextureRect(animacion->rectActual());
@@ -45,4 +47,29 @@ void Enemigo::mover(Direccion dir){
 	}
 	sprite.setPosition(x,y);
 	animacion->update(dir);
+}
+
+void Enemigo::cambiarDireccion(Direccion& actual) {
+	Direccion dir = Direccion(rand()%4);
+	if (dir == actual) {
+		switch (actual)
+		{
+		case ARRIBA:
+			actual = ABAJO;
+			break;
+		case ABAJO:
+			actual = ARRIBA;
+			break;
+		case DERECHA:
+			actual = IZQUIERDA;
+			break;
+		case IZQUIERDA:
+			actual = DERECHA;
+			break;
+		default:
+			break;
+		}
+	} else {
+		actual = dir;
+	}
 }

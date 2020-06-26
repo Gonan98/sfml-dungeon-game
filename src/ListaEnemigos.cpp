@@ -30,3 +30,11 @@ void ListaEnemigos::mover(Direccion* dir) {
         i++;
     }
 }
+
+void ListaEnemigos::cambiarDirecciones(Direccion* dir) {
+    int i = 0;
+    for(Enemigo* &e : lista) {
+        e->cambiarDireccion(dir[i]);
+        i++;
+    }
+}

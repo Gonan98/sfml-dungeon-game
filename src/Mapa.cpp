@@ -169,3 +169,7 @@ void Mapa::dibujarEnemigos(RenderWindow& w) {
 void Mapa::moverEnemigos(Direccion* dir) {
 	enemies->mover(dir);
 }
+
+void Mapa::cambiarDireccionEnemigos(Direccion* dir) {
+	enemies->cambiarDirecciones(dir);
+}

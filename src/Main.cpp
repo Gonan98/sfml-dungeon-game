@@ -43,7 +43,7 @@ int main() {
     
     Animacion* aJugador = new Animacion(12, 4, 3, 0.2f, 3, 0, 2, 1);
 
-    Jugador* jugador = new Jugador(tJugador1, aJugador, "Andre", 0, 0, 8 , 8);
+    Jugador* jugador = new Jugador(tJugador1, aJugador, "Andre", 48, 48, 8 , 8);
     Mapa* mapa = new Mapa(tTerreno[0], tNaturaleza, tEnemigos);
     Direccion* dir = new Direccion[mapa->getTotalEnemigos()];
 
@@ -51,7 +51,7 @@ int main() {
         dir[i] = Direccion(rand()%4);
     }
     
-
+    Clock clock;
     while (window.isOpen())
     {
         Event event;
@@ -71,6 +71,11 @@ int main() {
         else if(Keyboard::isKeyPressed(Keyboard::Left))
             jugador->mover(IZQUIERDA);
 
+        if (clock.getElapsedTime().asSeconds() > 1) {
+            mapa->cambiarDireccionEnemigos(dir);
+            clock.restart();
+        }
+        
         mapa->moverEnemigos(dir);
 
         window.clear();

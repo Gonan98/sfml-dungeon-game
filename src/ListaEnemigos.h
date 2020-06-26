@@ -17,6 +17,7 @@ public:
     void eliminar(int pos);
     void dibujar(RenderWindow& w);
     void mover(Direccion* dir);
+    void cambiarDirecciones(Direccion* dir);
 };
 
 #endif

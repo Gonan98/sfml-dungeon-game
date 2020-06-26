@@ -7,6 +7,7 @@ class Enemigo : public Entidad{
 protected:
 	int damage;
 	int vida;
+	Direccion direccion;
 public:
 	Enemigo();
 	Enemigo(Texture& t, Animacion* animacion, float x, float y);
@@ -15,12 +16,15 @@ public:
 
 	int getDamage();
 	int getVida();
+	Direccion getDireccion();
 
 	void setDamage(int value);
 	void setVida(int value);
+	void setDireccion(Direccion);
 
 	void dibujar(RenderWindow& w);
 	void mover(Direccion dir);
+	void cambiarDireccion(Direccion& actual);
 };
 
 #endif
