@@ -10,6 +10,7 @@ Jugador::Jugador(Texture& t, Animacion* animacion, std::string nombre, float x, 
 	vidas = 20;
 	puntaje = 0;
 	this->nombre = nombre;
+	hitbox = new Hitbox(x,y,48,48);
 }
 
 Jugador::~Jugador() {}
@@ -23,6 +24,7 @@ void Jugador::setPuntaje(int value) { puntaje = value; }
 void Jugador::setNombre(std::string value) { nombre = value; }
 
 void Jugador::dibujar(sf::RenderWindow &w) {
+	hitbox->dibujar(w);
 	sprite.setTextureRect(animacion->rectActual());
 	w.draw(sprite);
 }
@@ -45,6 +47,7 @@ void Jugador::mover(Direccion dir) {
 			break;
 	}
 	sprite.setPosition(x,y);
+	hitbox->posicionar(x,y);
 	animacion->update(dir);
 }
 

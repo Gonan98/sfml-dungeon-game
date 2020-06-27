@@ -62,14 +62,14 @@ int main() {
             }
         }
 
+        if(Keyboard::isKeyPressed(Keyboard::Right))
+            jugador->mover(DERECHA);
+        else if(Keyboard::isKeyPressed(Keyboard::Left))
+            jugador->mover(IZQUIERDA);
         if(Keyboard::isKeyPressed(Keyboard::Up))
             jugador->mover(ARRIBA);
         else if(Keyboard::isKeyPressed(Keyboard::Down))
             jugador->mover(ABAJO);
-        else if(Keyboard::isKeyPressed(Keyboard::Right))
-            jugador->mover(DERECHA);
-        else if(Keyboard::isKeyPressed(Keyboard::Left))
-            jugador->mover(IZQUIERDA);
 
         if (clock.getElapsedTime().asSeconds() > 1) {
             mapa->cambiarDireccionEnemigos(dir);

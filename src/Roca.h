@@ -6,7 +6,7 @@
 class Roca : public Naturaleza {
 public:
     Roca();
-    Roca(Texture& t, float x, float y, float w, float h);
+    Roca(Texture& t, float x, float y);
     ~Roca();
 
     void dibujarSuperior(RenderWindow& w);

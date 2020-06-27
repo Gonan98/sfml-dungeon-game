@@ -7,7 +7,7 @@ class Arbol : public Naturaleza {
 
 public:
     Arbol();
-    Arbol(Texture& t, float x, float y, float w, float h);
+    Arbol(Texture& t, float x, float y);
     ~Arbol();
 
     void dibujarSuperior(RenderWindow& w);

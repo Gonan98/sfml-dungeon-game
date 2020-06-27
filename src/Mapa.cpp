@@ -56,13 +56,13 @@ void Mapa::_posicionarNaturaleza(Texture* tNaturaleza) {
 	for (int i = 0; i < FILA; i++) {
 		for (int j = 0; j < COLUMNA; j++) {
 			if (matriz[i][j] == 1) {
-				natures->agregar(new Piedra(tNaturaleza[3], j*CUADRO, i*CUADRO,0,0));
+				natures->agregar(new Piedra(tNaturaleza[3], j*CUADRO, i*CUADRO));
 			} else if (matriz[i][j] == 2) {
-				natures->agregar(new Arbol(tNaturaleza[0], j*CUADRO, i*CUADRO,0,0));
+				natures->agregar(new Arbol(tNaturaleza[0], j*CUADRO, i*CUADRO));
 			} else if (matriz[i][j] == 3) {
-				natures->agregar(new Monte(tNaturaleza[1], j*CUADRO, i*CUADRO,0,0));
+				natures->agregar(new Monte(tNaturaleza[1], j*CUADRO, i*CUADRO));
 			} else if (matriz[i][j] == 4) {
-				natures->agregar(new Roca(tNaturaleza[2], j*CUADRO, i*CUADRO,0,0));
+				natures->agregar(new Roca(tNaturaleza[2], j*CUADRO, i*CUADRO));
 			}
 		}
 	}
@@ -111,6 +111,10 @@ void Mapa::_generarMatriz() {
 			}
 		}
 	}
+}
+
+bool Mapa::_colisiona() {
+	return false;
 }
 
 Mapa::Mapa(Texture& t, Texture* tNaturaleza, Texture* tEnemigos) {

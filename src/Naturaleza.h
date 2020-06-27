@@ -1,9 +1,7 @@
 #ifndef _NATURALEZA_H_
 #define _NATURALEZA_H_
 
-#include "SFML/Graphics.hpp"
-
-using namespace sf;
+#include "Hitbox.h"
 
 class Naturaleza {
 protected:
@@ -11,26 +9,22 @@ protected:
 	float y1;
 	float x2;
 	float y2;
-	float w;
-	float h;
 	Sprite sprite;
+	Hitbox* hbox;
 public:
 	Naturaleza();
-	Naturaleza(Texture& t, float x, float y, float w, float h);
+	Naturaleza(Texture& t, float x, float y);
 	~Naturaleza();
 
 	float getX();
 	float getY();
-	float getAncho();
-	float getAlto();
+	Hitbox* getHitbox();
 
 	void setX(float value);
 	void setY(float value);
-	void setAncho(float value);
-	void setAlto(float value);
 
-	virtual void dibujarInferior(RenderWindow& w);
-	virtual void dibujarSuperior(RenderWindow& w);
+	virtual void dibujarInferior(RenderWindow& w) = 0;
+	virtual void dibujarSuperior(RenderWindow& w) = 0;
 };
 
 #endif

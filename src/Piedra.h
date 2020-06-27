@@ -6,7 +6,7 @@
 class Piedra : public Naturaleza {
 public:
     Piedra();
-    Piedra(Texture& t, float x, float y, float w, float h);
+    Piedra(Texture& t, float x, float y);
     ~Piedra();
 
     void dibujar(RenderWindow& w);

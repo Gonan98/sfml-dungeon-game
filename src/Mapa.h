@@ -34,6 +34,7 @@ private:
 	void _posicionarNaturaleza(Texture* tNaturaleza);
 	void _generarMatriz();
 	bool _regionVacia(int i, int j, int tipo);
+	bool _colisiona();
 public:
 	Mapa(Texture& t, Texture* tNaturaleza, Texture* tEnemigos);
 	~Mapa();

@@ -6,7 +6,7 @@
 class Monte : public Naturaleza {
 public:
     Monte();
-    Monte(Texture& t, float x, float y, float w, float h);
+    Monte(Texture& t, float x, float y);
     ~Monte();
 
     void dibujarSuperior(RenderWindow& w);

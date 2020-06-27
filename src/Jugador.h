@@ -2,7 +2,6 @@
 #define _JUGADOR_H_
 
 #include "Entidad.h"
-#include <SFML/Graphics.hpp>
 #include <string>
 
 class Jugador : public Entidad{
