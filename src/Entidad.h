@@ -28,6 +28,7 @@ public:
 	float getY();
 	float getDx();
 	float getDy();
+	Hitbox* getHitbox();
 
 	void setX(float value);
 	void setY(float value);

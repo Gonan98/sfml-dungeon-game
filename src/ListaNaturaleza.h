@@ -6,11 +6,16 @@
 
 class ListaNaturaleza {
 private:
-    std::vector<Naturaleza*> lista;
+    Naturaleza** lista;
+    int indice;
+    int max;
 public:
-    ListaNaturaleza();
+    ListaNaturaleza(int max);
     ~ListaNaturaleza();
 
+    int getTotal();
+    Naturaleza* getNaturaleza(int pos);
+    Naturaleza* getUltimo();
     void agregar(Naturaleza* n);
     void dibujarSuperiores(RenderWindow& w);
     void dibujarInferiores(RenderWindow& w);

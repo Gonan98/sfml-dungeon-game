@@ -6,11 +6,13 @@ Enemigo::Enemigo() : Entidad(){
 }
 
 Enemigo::Enemigo(Texture& t, Animacion* animacion, float x, float y) : Entidad(t, animacion, x, y) {
-
+	hitbox = new Hitbox(x+8,y+16,32,32);
+	direccion = Direccion(rand()%4);
 }
 
 Enemigo::Enemigo(Texture& t, Animacion* animacion, float x, float y, float dx, float dy) : Entidad(t, animacion, x, y, dx, dy) {
-
+	hitbox = new Hitbox(x+8,y+16,32,32);
+	direccion = Direccion(rand()%4);
 }
 
 Enemigo::~Enemigo(){}
@@ -26,6 +28,29 @@ void Enemigo::setDireccion(Direccion value) { direccion = value; }
 void Enemigo::dibujar(sf::RenderWindow& w){
 	sprite.setTextureRect(animacion->rectActual());
 	w.draw(sprite);
+	//hitbox->dibujar(w);
+}
+
+void Enemigo::mover(){
+	switch(direccion) {
+		case Direccion::ARRIBA:
+			y -= dy;
+			break;
+		case Direccion::ABAJO:
+			y += dy;
+			break;
+		case Direccion::DERECHA:
+			x += dx;
+			break;
+		case Direccion::IZQUIERDA:
+			x -= dx;
+			break;
+		default:
+			break;
+	}
+	sprite.setPosition(x,y);
+	hitbox->posicionar(x+8,y+16);
+	animacion->update(direccion);
 }
 
 void Enemigo::mover(Direccion dir){
@@ -46,30 +71,31 @@ void Enemigo::mover(Direccion dir){
 			break;
 	}
 	sprite.setPosition(x,y);
+	hitbox->posicionar(x+8,y+16);
 	animacion->update(dir);
 }
 
-void Enemigo::cambiarDireccion(Direccion& actual) {
+void Enemigo::cambiarDireccion() {
 	Direccion dir = Direccion(rand()%4);
-	if (dir == actual) {
-		switch (actual)
+	if (dir == direccion) {
+		switch (direccion)
 		{
 		case ARRIBA:
-			actual = ABAJO;
+			direccion = ABAJO;
 			break;
 		case ABAJO:
-			actual = ARRIBA;
+			direccion = ARRIBA;
 			break;
 		case DERECHA:
-			actual = IZQUIERDA;
+			direccion = IZQUIERDA;
 			break;
 		case IZQUIERDA:
-			actual = DERECHA;
+			direccion = DERECHA;
 			break;
 		default:
 			break;
 		}
 	} else {
-		actual = dir;
+		direccion = dir;
 	}
 }

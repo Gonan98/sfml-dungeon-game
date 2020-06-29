@@ -1,14 +1,7 @@
 #include "Entidad.h"
 
 Entidad::Entidad(){
-	x = 0.f;
-	y = 0.f;
-	dx = 8.f;
-	dy = 8.f;
-	estado = REPOSO;
-	direccion = ABAJO;
-	animacion = new Animacion();
-	hitbox = new Hitbox();
+	
 }
 
 Entidad::Entidad(Texture& t, Animacion* animacion, float x, float y) {
@@ -52,6 +45,7 @@ float Entidad::getX() { return x; }
 float Entidad::getY() { return y; }
 float Entidad::getDx() { return dx; }
 float Entidad::getDy() { return dy; }
+Hitbox* Entidad::getHitbox() { return hitbox; }
 
 void Entidad::setX(float value) { x = value; }
 void Entidad::setY(float value) { y = value; }

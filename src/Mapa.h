@@ -3,6 +3,7 @@
 
 #include "ListaEnemigos.h"
 #include "ListaNaturaleza.h"
+#include "ListaCofres.h"
 #include "Roca.h"
 #include "Piedra.h"
 #include "Arbol.h"
@@ -26,28 +27,36 @@ class Mapa {
 private:
 	ListaNaturaleza* natures;
 	ListaEnemigos* enemies;
+	ListaCofres* cofres;
 	int** matriz;
 	int dificultad;
 	Sprite sprite;
 
+	void _posicionarCofres(Texture& tCofre);
 	void _posicionarEnemigos(Texture* tEnemigos);
 	void _posicionarNaturaleza(Texture* tNaturaleza);
 	void _generarMatriz();
 	bool _regionVacia(int i, int j, int tipo);
-	bool _colisiona();
 public:
-	Mapa(Texture& t, Texture* tNaturaleza, Texture* tEnemigos);
+	Mapa(Texture& t, Texture* tNaturaleza, Texture* tEnemigos, Texture& tCofres);
 	~Mapa();
 
 	int getTotalEnemigos();
+	int getTotalNatural();
+
+	ListaEnemigos* getEnemigos();
+	ListaNaturaleza* getNaturalezas();
+	ListaCofres* getCofres();
 
 	void dibujar(RenderWindow& w);
 	void dibujarNaturalezaSuperior(RenderWindow& w);
 	void dibujarNaturalezaInferior(RenderWindow& w);
+	void dibujarCofres(RenderWindow& w);
 	void guardar();
 	void dibujarEnemigos(RenderWindow& w);
-	void moverEnemigos(Direccion* dir);
-	void cambiarDireccionEnemigos(Direccion* dir);
+	void moverEnemigos();
+	void cambiarDireccionEnemigos();
+	void colisionEnemigoDecoracion();
 };
 
 #endif

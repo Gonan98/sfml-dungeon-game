@@ -7,17 +7,22 @@
 class ListaEnemigos
 {
 private:
-    std::vector<Enemigo*> lista;
+    Enemigo** enemigos;
+    int indice;
+    int max;
 public:
-    ListaEnemigos();
+    ListaEnemigos(int max);
     ~ListaEnemigos();
     
     int getTotal();
+    Enemigo* getEnemigo(int pos);
+    Enemigo* getUltimo();
+
     void agregar(Enemigo* e);
     void eliminar(int pos);
     void dibujar(RenderWindow& w);
-    void mover(Direccion* dir);
-    void cambiarDirecciones(Direccion* dir);
+    void mover();
+    void cambiarDirecciones();
 };
 
 #endif

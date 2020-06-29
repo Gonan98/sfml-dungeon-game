@@ -8,6 +8,14 @@ ListaMapas::~ListaMapas() {
 
 }
 
+Mapa* ListaMapas::mapaActual() {
+    if (!lista.empty()) {
+        return lista[indice];
+    } else {
+        return nullptr;
+    }
+}
+
 void ListaMapas::nuevoMapa(Mapa* m) {
     lista.push_back(m);
     indice++;

@@ -12,6 +12,7 @@ public:
     ListaMapas();
     ~ListaMapas();
 
+    Mapa* mapaActual();
     void nuevoMapa(Mapa* m);
     void mapaAnterior();
     void mapaSiguiente();

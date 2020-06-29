@@ -24,7 +24,8 @@ public:
 
 	void dibujar(RenderWindow& w);
 	void mover(Direccion dir);
-	void cambiarDireccion(Direccion& actual);
+	void mover();
+	void cambiarDireccion();
 };
 
 #endif

@@ -4,7 +4,7 @@ Murcielago::Murcielago() : Enemigo(){
 
 }
 Murcielago::Murcielago(Texture& t, Animacion* animacion, float x, float y) : Enemigo(t, animacion, x, y) {
-    dx = dy = 10;
+    dx = dy = 8;
     damage = 2;
     vida = 5;
 }

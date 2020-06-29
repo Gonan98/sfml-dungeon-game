@@ -1,28 +1,38 @@
 #include "ListaNaturaleza.h"
 
-ListaNaturaleza::ListaNaturaleza() {
-    
+ListaNaturaleza::ListaNaturaleza(int max) {
+    this->max = max;
+    indice = -1;
+    lista = new Naturaleza*[this->max];
 }
 
 ListaNaturaleza::~ListaNaturaleza() {
-    for(auto &n : lista) {
-        delete n;
-    }
-    lista.clear();
+
 }
 
 void ListaNaturaleza::agregar(Naturaleza* n) {
-    lista.push_back(n);
-}
-
-void ListaNaturaleza::dibujarSuperiores(RenderWindow& w) {
-    for (auto &natural : lista) {
-        natural->dibujarSuperior(w);
+    if (indice < max-1) {
+        indice++;
+        lista[indice] = n;
     }
 }
 
+void ListaNaturaleza::dibujarSuperiores(RenderWindow& w) {
+    for (int i = 0; i < indice+1; i++)
+        lista[i]->dibujarSuperior(w);
+}
+
 void ListaNaturaleza::dibujarInferiores(RenderWindow& w) {
-    for (auto &natural : lista) {
-        natural->dibujarInferior(w);
+    for (int i = 0; i < indice+1; i++)
+        lista[i]->dibujarInferior(w);
+}
+
+int ListaNaturaleza::getTotal() { return indice+1; }
+Naturaleza* ListaNaturaleza::getNaturaleza(int pos) { return lista[pos]; }
+Naturaleza* ListaNaturaleza::getUltimo() { 
+    if (indice > -1) {
+        return lista[indice];
+    } else {
+        return nullptr;
     }
 }

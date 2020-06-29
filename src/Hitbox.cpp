@@ -32,5 +32,15 @@ void Hitbox::dibujar(RenderWindow& w){
 }
 
 void Hitbox::posicionar(float x, float y) {
-    rectangle.setPosition(x,y);
+    this->x = x;
+    this->y = y;
+    rectangle.setPosition(this->x,this->y);
+}
+
+bool Hitbox::colisiona(Hitbox* hbox) {
+
+    return this->x + this->w > hbox->getX() &&
+        this->x < hbox->getX() + hbox->getW() &&
+        this->y + this->h > hbox->getY() &&
+        this->y < hbox->getY() + hbox->getH();
 }

@@ -5,8 +5,7 @@
 
 using namespace sf;
 
-class Hitbox
-{
+class Hitbox {
 private:
     float x;
     float y;
@@ -30,6 +29,7 @@ public:
 
     void dibujar(RenderWindow& w);
     void posicionar(float x, float y);
+    bool colisiona(Hitbox* hbox);
 };
 
 #endif
