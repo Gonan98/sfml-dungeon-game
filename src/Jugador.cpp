@@ -10,6 +10,7 @@ Jugador::Jugador(Texture& t, Animacion* animacion, std::string nombre, float x, 
 	vidas = 20;
 	puntaje = 0;
 	this->nombre = nombre;
+	direccion = Direccion::ABAJO;
 	hitbox = new Hitbox(x+8,y+16,32,32);
 }
 
@@ -30,7 +31,8 @@ void Jugador::dibujar(sf::RenderWindow &w) {
 }
 
 void Jugador::mover(Direccion dir) {
-	switch(dir) {
+	direccion = dir;
+	switch(direccion) {
 		case Direccion::ARRIBA:
 			y -= dy;
 			break;

@@ -46,8 +46,10 @@ float Entidad::getY() { return y; }
 float Entidad::getDx() { return dx; }
 float Entidad::getDy() { return dy; }
 Hitbox* Entidad::getHitbox() { return hitbox; }
+Direccion Entidad::getDireccion() { return direccion; }
 
 void Entidad::setX(float value) { x = value; }
 void Entidad::setY(float value) { y = value; }
 void Entidad::setDx(float value) { dx = value; }
 void Entidad::setDy(float value) { dy = value; }
+void Entidad::setDireccion(Direccion dir) { direccion = dir; }

@@ -19,11 +19,9 @@ Enemigo::~Enemigo(){}
 
 int Enemigo::getDamage() { return damage; }
 int Enemigo::getVida() { return vida; }
-Direccion Enemigo::getDireccion() { return direccion; }
 
 void Enemigo::setDamage(int value) { damage = value; }
 void Enemigo::setVida(int value) { vida = value; }
-void Enemigo::setDireccion(Direccion value) { direccion = value; }
 
 void Enemigo::dibujar(sf::RenderWindow& w){
 	sprite.setTextureRect(animacion->rectActual());

@@ -148,7 +148,7 @@ void Mapa::_generarMatriz() {
 
 Mapa::Mapa(Texture& t, Texture* tNaturaleza, Texture* tEnemigos, Texture& tCofres) {
 	_generarMatriz();
-	guardar();
+	//guardar();
 	_posicionarNaturaleza(tNaturaleza);
 	_posicionarCofres(tCofres);
 	_posicionarEnemigos(tEnemigos);

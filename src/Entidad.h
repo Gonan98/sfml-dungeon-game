@@ -29,7 +29,9 @@ public:
 	float getDx();
 	float getDy();
 	Hitbox* getHitbox();
+	Direccion getDireccion();
 
+	void setDireccion(Direccion);
 	void setX(float value);
 	void setY(float value);
 	void setDx(float value);

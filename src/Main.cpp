@@ -46,6 +46,7 @@ int main() {
     Jugador* jugador = new Jugador(tJugador1, aJugador, "Andre", 48, 48, 6 , 6);
     ListaMapas* lista = new ListaMapas();
     lista->nuevoMapa(new Mapa(tTerreno[rand()%4], tNaturaleza, tEnemigos, tCofre));
+    int n = lista->mapaActual()->getTotalNatural();
 
     Clock clock;
     while (window.isOpen())
@@ -62,6 +63,7 @@ int main() {
             if (Keyboard::isKeyPressed(Keyboard::N)) {
                 lista->nuevoMapa(new Mapa(tTerreno[rand()%4], tNaturaleza, tEnemigos, tCofre));
                 lista->mapaSiguiente();
+                n = lista->mapaActual()->getTotalNatural();
             } else if (Keyboard::isKeyPressed(Keyboard::A)) {
                 lista->mapaAnterior();
             } else if (Keyboard::isKeyPressed(Keyboard::S)) {
@@ -70,33 +72,36 @@ int main() {
             clock.restart();
         }
 
-        if(Keyboard::isKeyPressed(Keyboard::Right))
+        for (int i = 0; i < n; i++) {
+            Hitbox* a = jugador->getHitbox();
+            Hitbox* b = lista->mapaActual()->getNaturalezas()->getNaturaleza(i)->getHitbox();
+            if(b->colisiona(a)) {
+                if (jugador->getDireccion() == DERECHA) {
+                    jugador->mover(IZQUIERDA);
+                } else if (jugador->getDireccion() == IZQUIERDA) {
+                    jugador->mover(DERECHA);
+                } 
+                if (jugador->getDireccion() == ARRIBA) {
+                    jugador->mover(ABAJO);
+                } else if (jugador->getDireccion() == ABAJO) {
+                    jugador->mover(ARRIBA);
+                }
+            }
+        }
+
+        if(Keyboard::isKeyPressed(Keyboard::Right)) {
             jugador->mover(DERECHA);
-        else if(Keyboard::isKeyPressed(Keyboard::Left))
+        }
+        else if(Keyboard::isKeyPressed(Keyboard::Left)) {
             jugador->mover(IZQUIERDA);
-        if(Keyboard::isKeyPressed(Keyboard::Up))
+        }
+        if(Keyboard::isKeyPressed(Keyboard::Up)) {
             jugador->mover(ARRIBA);
-        else if(Keyboard::isKeyPressed(Keyboard::Down))
+        }
+        else if(Keyboard::isKeyPressed(Keyboard::Down)) {
             jugador->mover(ABAJO);
-
-        /*if (clock.getElapsedTime().asSeconds() > 1) {
-            for (int i = 0; i < mapa->getTotalNatural(); i++) {
-                Hitbox* a = jugador->getHitbox();
-                Hitbox* b = mapa->getNaturalezas()->getNaturaleza(i)->getHitbox();
-                if(b->colisiona(a)) {
-                    std::cout << "Colision con terreno " << i+1 << ": " << "(" << b->getX() << ";" << b->getY() << ")\n";
-                }
-            }
-
-            for (int i = 0; i < mapa->getTotalEnemigos(); i++) {
-                Hitbox* a = jugador->getHitbox();
-                Hitbox* b = mapa->getEnemigos()->getEnemigo(i)->getHitbox();
-                if(b->colisiona(a)) {
-                    std::cout << "Colision con un enemigo" << i << "\n";
-                }
-            }
-            clock.restart();
-        }*/
+        }
+        
         lista->mapaActual()->colisionEnemigoDecoracion();
         lista->mapaActual()->moverEnemigos();
 
