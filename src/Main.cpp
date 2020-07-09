@@ -59,17 +59,20 @@ int main() {
             }
         }
 
-        if (clock.getElapsedTime().asSeconds() > 1) {
+        if (clock.getElapsedTime().asMilliseconds() > 100) {
             if (Keyboard::isKeyPressed(Keyboard::N)) {
                 lista->nuevoMapa(new Mapa(tTerreno[rand()%4], tNaturaleza, tEnemigos, tCofre));
-                lista->mapaSiguiente();
                 n = lista->mapaActual()->getTotalNatural();
+                clock.restart();
             } else if (Keyboard::isKeyPressed(Keyboard::A)) {
                 lista->mapaAnterior();
+                n = lista->mapaActual()->getTotalNatural();
+                clock.restart();
             } else if (Keyboard::isKeyPressed(Keyboard::S)) {
                 lista->mapaSiguiente();
+                n = lista->mapaActual()->getTotalNatural();
+                clock.restart();
             }
-            clock.restart();
         }
 
         for (int i = 0; i < n; i++) {
